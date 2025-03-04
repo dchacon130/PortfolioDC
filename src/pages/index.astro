@@ -1,11 +1,37 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import Layout from "../layouts/Layout.astro";
+import Menu from "../components/Menu.astro";
+import ContactButton from "../components/ContactButton.astro";
+import Footer from "../components/Footer.astro";
+import "../styles/global.css";
+// layout -> display -> spacing -> border -> colors -> text
 ---
 
 <Layout>
-	<Welcome />
+  <Menu />
+
+  <div class="flex flex-col min-h-full">
+    <div class="flex flex-col md:flex-row">
+      <div class="flex items-center justify-end p-10 w-100 h-120 md:w-1/2">
+        <img
+          src="../assets/diego-chacon.png"
+          alt="Diego Chacon"
+          class="max-w-full max-h-full transition-transform duration-500 ease-in-out hover:scale-105"
+        />
+      </div>
+      <div class="flex items-center justify-end p-6 w-120 md:w-1/2">
+        <div class="flex flex-col items-center">
+          <h1
+            class="text-4xl text-grey text-left transition-transform duration-300 ease-out hover:scale-105"
+          >
+            Software Developer with a passion for creating beautiful and quality
+            applications.
+          </h1>
+          <ContactButton />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <Footer />
 </Layout>
