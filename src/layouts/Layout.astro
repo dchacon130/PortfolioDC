@@ -1,3 +1,8 @@
+---
+import Footer from "../components/Footer.astro";
+import Menu from "../components/Menu.astro";
+---
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -7,8 +12,10 @@
     <meta name="generator" content={Astro.generator} />
     <title>Diego Chacon - PortfolioDC</title>
   </head>
-  <body class="bg-principal-color font-mono">
+  <body class="bg-principal-color font-mono text-white">
+    <Menu />
     <slot />
+    <Footer />
   </body>
 </html>
 

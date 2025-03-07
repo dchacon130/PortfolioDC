@@ -1,37 +1,31 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import Menu from "../components/Menu.astro";
-import ContactButton from "../components/ContactButton.astro";
-import Footer from "../components/Footer.astro";
 import "../styles/global.css";
+
 // layout -> display -> spacing -> border -> colors -> text
 ---
 
 <Layout>
-  <Menu />
-
-  <div class="flex flex-col min-h-full">
-    <div class="flex flex-col md:flex-row">
-      <div class="flex items-center justify-end p-10 w-100 h-120 md:w-1/2">
-        <img
-          src="../assets/diego-chacon.png"
-          alt="Diego Chacon"
-          class="max-w-full max-h-full transition-transform duration-500 ease-in-out hover:scale-105"
-        />
-      </div>
-      <div class="flex items-center justify-end p-6 w-120 md:w-1/2">
-        <div class="flex flex-col items-center">
-          <h1
-            class="text-4xl text-grey text-left transition-transform duration-300 ease-out hover:scale-105"
-          >
-            Software Developer with a passion for creating beautiful and quality
-            applications.
-          </h1>
-          <ContactButton />
-        </div>
-      </div>
+  <div class="flex flex-col items-center justify-center min-h-screen p-4">
+    <div class="mb-8">
+      <img
+        class="max-w-full h-auto md:h-96"
+        src="../../public/assets/diego-chacon.png"
+        alt="Diego Chacon"
+      />
+    </div>
+    <div class="text-center mb-8">
+      <p class="text-lg md:text-xl text-ebony leading-relaxed">
+        Software Developer with a passion for creating beautiful and quality
+        applications.
+      </p>
+    </div>
+    <div>
+      <button
+        class="bg-red-orange text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-orange-600 transition duration-300"
+      >
+        Contact!
+      </button>
     </div>
   </div>
-
-  <Footer />
 </Layout>

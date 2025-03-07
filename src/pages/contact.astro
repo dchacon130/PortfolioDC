@@ -1,0 +1,92 @@
+---
+import Layout from "../layouts/Layout.astro";
+import "../styles/global.css";
+---
+
+<Layout>
+  <div class="container mx-auto p-4">
+    <h1 class="text-3xl font-bold text-ebony mb-4 text-center">Contact</h1>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div class="p-10">
+        <h2 class="text-2xl font-semibold text-ebony mb-4">
+          DO YOU HAVE A PROJECT TO DISCUSS?
+        </h2>
+        <h3 class="text-lg text-ebony mb-2">Get in touch:</h3>
+        <p class="text-ebony mb-2">dchacon130@gmail.com</p>
+        <div class="flex space-x-4 mb-6">
+          <a href="#" class="text-red-orange hover:underline">LinkedIn</a>
+          <a href="#" class="text-red-orange hover:underline">Instagram</a>
+          <a href="#" class="text-red-orange hover:underline">Telegram</a>
+          <a href="#" class="text-red-orange hover:underline">Discord</a>
+        </div>
+      </div>
+      <div>
+        <form
+          action="https://formspree.io/f/xdkenlqw"
+          method="POST"
+          id="contactForm"
+          class="bg-white rounded-lg shadow-md p-6"
+        >
+          <h2 class="text-2xl font-semibold text-ebony mb-4">CONTACT FORM</h2>
+          <div class="mb-4">
+            <label for="name" class="block text-ebony text-sm font-medium mb-2"
+              >Name</label
+            >
+            <input
+              type="text"
+              name="name"
+              id="nameInput"
+              class="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-red-orange text-gray-800"
+              required
+            />
+          </div>
+          <div class="mb-4">
+            <label for="email" class="block text-ebony text-sm font-medium mb-2"
+              >Email</label
+            >
+            <input
+              type="email"
+              name="email"
+              id="emailInput"
+              class="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-red-orange text-gray-800"
+              required
+            />
+          </div>
+          <div class="mb-4">
+            <label
+              for="message"
+              class="block text-ebony text-sm font-medium mb-2">Message</label
+            >
+            <textarea
+              name="message"
+              id="messageInput"
+              rows="4"
+              class="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-red-orange text-gray-800"
+              required></textarea>
+          </div>
+          <div>
+            <button
+              type="submit"
+              class="bg-red-orange hover:bg-orange-600 text-white font-medium py-2 px-4 rounded-md transition duration-300"
+            >
+              Enviar!
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <script>
+    const form = document.getElementById("contactForm");
+    const nameInput = document.getElementById("nameInput");
+    const emailInput = document.getElementById("emailInput");
+    const messageInput = document.getElementById("messageInput");
+
+    form.addEventListener("submit", (event) => {
+      // Limpiar los campos
+      nameInput.value = "";
+      emailInput.value = "";
+      messageInput.value = "";
+    });
+  </script>
+</Layout>
