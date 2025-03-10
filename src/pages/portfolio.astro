@@ -1,5 +1,7 @@
 ---
+import ContactButton from "../components/ContactButton.astro";
 import Layout from "../layouts/Layout.astro";
+ContactButton;
 import "../styles/global.css";
 ---
 
@@ -71,6 +73,9 @@ import "../styles/global.css";
       </div>
     </div>
     <div class="container mx-auto p-4 mt-10">
+      <div class="mb-10">
+        <ContactButton />
+      </div>
       <h1 class="text-2xl font-semibold text-ebony mb-10">Experience</h1>
       <div class="text-lg text-ebony leading-relaxed mb-10">
         <h1 class="text-2xl font-semibold">919it LLC</h1>
@@ -171,6 +176,9 @@ import "../styles/global.css";
           management systems.
         </p>
       </div>
+    </div>
+    <div>
+      <ContactButton />
     </div>
   </div>
 </Layout>
