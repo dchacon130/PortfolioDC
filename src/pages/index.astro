@@ -1,5 +1,7 @@
 ---
+import ContactButton from "../components/ContactButton.astro";
 import Layout from "../layouts/Layout.astro";
+
 import "../styles/global.css";
 
 // layout -> display -> spacing -> border -> colors -> text
@@ -16,16 +18,12 @@ import "../styles/global.css";
     </div>
     <div class="text-center mb-8">
       <p class="text-lg md:text-xl text-ebony leading-relaxed">
-        Software Developer with a passion for creating beautiful and quality
-        applications.
+        Review my service offerings and discover how I can assist in
+        guaranteeing your software's reliability.
       </p>
     </div>
     <div>
-      <button
-        class="bg-red-orange text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-orange-600 transition duration-300"
-      >
-        Contact!
-      </button>
+      <ContactButton />
     </div>
   </div>
 </Layout>
