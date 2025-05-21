@@ -1,48 +1,111 @@
-# Astro Starter Kit: Basics
+# Portfolio DC
 
-```sh
-npm create astro@latest -- --template basics
+A modern and responsive portfolio website built with Astro, showcasing my work as a Software Developer and QA Engineer.
+
+## 🚀 Features
+
+- **Modern Design**: Clean and professional interface with smooth animations
+- **Responsive**: Fully responsive design that works on all devices
+- **Fast Performance**: Built with Astro for optimal performance
+- **SEO Friendly**: Optimized for search engines
+- **Dark/Light Mode**: Support for both dark and light themes
+- **Contact Form**: Interactive contact form for easy communication
+- **Project Showcase**: Dedicated section to showcase projects
+- **Social Integration**: Links to professional social media profiles
+
+## 🛠️ Technologies
+
+- [Astro](https://astro.build/) - Modern static site builder
+- [Tailwind CSS](https://tailwindcss.com/) - Utility-first CSS framework
+- [TypeScript](https://www.typescriptlang.org/) - Type-safe JavaScript
+- [Vercel](https://vercel.com/) - Deployment platform
+
+## 📦 Installation
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/yourusername/portfolio-dc.git
+   ```
+
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+3. Start the development server:
+   ```bash
+   npm run dev
+   ```
+
+4. Build for production:
+   ```bash
+   npm run build
+   ```
+
+## 🏗️ Project Structure
+
 ```
-
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/basics)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/basics)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/basics/devcontainer.json)
-
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
-
-![just-the-basics](https://github.com/withastro/astro/assets/2244813/a0a5533c-a856-4198-8470-2d67b1d7c554)
-
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
-/
+portfolio-dc/
 ├── public/
-│   └── favicon.svg
+│   └── assets/
+│       ├── image/
+│       └── icons/
 ├── src/
+│   ├── components/
 │   ├── layouts/
-│   │   └── Layout.astro
-│   └── pages/
-│       └── index.astro
-└── package.json
+│   ├── pages/
+│   └── styles/
+├── astro.config.mjs
+├── package.json
+├── tailwind.config.mjs
+└── tsconfig.json
 ```
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+## 🎨 Customization
 
-## 🧞 Commands
+### Colors
+The project uses a custom color palette defined in `tailwind.config.mjs`:
+- Primary: Red-Orange (#FF4D4D)
+- Secondary: Ebony (#1A1A1A)
+- Background: White to Gray-50 gradient
 
-All commands are run from the root of the project, from a terminal:
+### Components
+Key components are located in `src/components/`:
+- `ContactButton.astro` - Reusable contact button
+- `Navbar.astro` - Navigation bar
+- `Footer.astro` - Site footer
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+## 📱 Responsive Design
 
-## 👀 Want to learn more?
+The website is fully responsive with breakpoints:
+- Mobile: < 640px
+- Tablet: 640px - 1024px
+- Desktop: > 1024px
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+## 🚀 Deployment
+
+The site is deployed on Vercel and can be accessed at [portfolio-dc.vercel.app](https://portfolio-dc.vercel.app)
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+## 📝 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 👤 Contact
+
+Diego Chacon - [@DiegoChacon20](https://twitter.com/DiegoChacon20)
+
+Project Link: [https://github.com/yourusername/portfolio-dc](https://github.com/yourusername/portfolio-dc)
+
+## 🙏 Acknowledgments
+
+- [Astro Documentation](https://docs.astro.build/)
+- [Tailwind CSS Documentation](https://tailwindcss.com/docs)
+- [Heroicons](https://heroicons.com/) for SVG icons
