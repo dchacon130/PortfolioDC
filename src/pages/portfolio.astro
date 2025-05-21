@@ -1,184 +1,262 @@
 ---
 import ContactButton from "../components/ContactButton.astro";
 import Layout from "../layouts/Layout.astro";
-ContactButton;
 import "../styles/global.css";
 ---
 
 <Layout>
-  <div class="container mx-auto p-4">
-    <h1 class="text-3xl font-bold text-ebony mb-8 text-center">Portfolio</h1>
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-      <div class="bg-white rounded-lg shadow-md p-6">
-        <img
-          src="../assets/image/PortfolioDC-web-background.png"
-          alt="Portfolio DC"
-          class="mb-4 rounded-md w-70 h-70 ml-14"
-        />
-        <h2 class="text-2xl font-semibold text-ebony mb-2">Portfolio DC</h2>
-        <p class="text-ebony text-sm mb-4">
-          I created this portfolio to showcase my dual expertise in Quality
-          Assurance (QA) and Software Development. With over 10 years of
-          experience, I aim to demonstrate my ability to ensure software quality
-          while also contributing to the development process. This portfolio
-          highlights my skills in test automation, manual testing, frontend and
-          backend development, and process automation. It serves as a gateway
-          for potential clients and employers to understand how I can add value
-          to their projects by delivering high-quality, efficient, and scalable
-          solutions
-        </p>
-        <div class="flex items-center justify-between">
-          <a
-            href="https://github.com/dchacon130/PortfolioDC"
-            class="text-red-orange hover:underline"
-            target="_blank">GitHub</a
-          >
-          <span class="text-gray-500 text-xs">Astro, HTML, CSS, JavaScript</span
-          >
+  <div class="container mx-auto p-4 pt-30">
+    <div class="max-w-7xl mx-auto">
+      <h1 class="text-4xl font-bold text-ebony mb-8 text-center">Portfolio</h1>
+      
+      <!-- Proyectos -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+        <!-- Portfolio DC -->
+        <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
+          <div class="relative">
+            <img
+              src="../assets/image/PortfolioDC-web-background.png"
+              alt="Portfolio DC"
+              class="w-full h-48 object-cover"
+            />
+            <div class="absolute top-4 right-4 bg-red-orange text-white px-3 py-1 rounded-full text-sm">
+              Web Development
+            </div>
+          </div>
+          <div class="p-6">
+            <h2 class="text-2xl font-semibold text-ebony mb-3">Portfolio DC</h2>
+            <p class="text-gray-600 mb-4 line-clamp-3">
+              I created this portfolio to showcase my dual expertise in Quality
+              Assurance (QA) and Software Development. With over 10 years of
+              experience, I aim to demonstrate my ability to ensure software quality
+              while also contributing to the development process.
+            </p>
+            <div class="flex flex-wrap gap-2 mb-4">
+              <span class="bg-gray-100 text-gray-600 px-3 py-1 rounded-full text-sm">Astro</span>
+              <span class="bg-gray-100 text-gray-600 px-3 py-1 rounded-full text-sm">HTML</span>
+              <span class="bg-gray-100 text-gray-600 px-3 py-1 rounded-full text-sm">CSS</span>
+              <span class="bg-gray-100 text-gray-600 px-3 py-1 rounded-full text-sm">JavaScript</span>
+            </div>
+            <div class="flex items-center justify-between">
+              <a
+                href="https://github.com/dchacon130/PortfolioDC"
+                class="text-red-orange hover:text-ebony transition-colors duration-200 font-medium flex items-center"
+                target="_blank"
+              >
+                Ver en GitHub
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-1" viewBox="0 0 20 20" fill="currentColor">
+                  <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 919IT LLC -->
+        <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
+          <div class="relative">
+            <img
+              src="../assets/image/919it-web-background.png"
+              alt="919IT LLC Website"
+              class="w-full h-48 object-cover"
+            />
+            <div class="absolute top-4 right-4 bg-red-orange text-white px-3 py-1 rounded-full text-sm">
+              Business Website
+            </div>
+          </div>
+          <div class="p-6">
+            <h2 class="text-2xl font-semibold text-ebony mb-3">919IT LLC</h2>
+            <p class="text-gray-600 mb-4 line-clamp-3">
+              A professional business website showcasing our software development and QA services. 
+              Built with modern web technologies to demonstrate our commitment to quality and innovation 
+              in software development.
+            </p>
+            <div class="flex flex-wrap gap-2 mb-4">
+              <span class="bg-gray-100 text-gray-600 px-3 py-1 rounded-full text-sm">Astro</span>
+              <span class="bg-gray-100 text-gray-600 px-3 py-1 rounded-full text-sm">HTML</span>
+              <span class="bg-gray-100 text-gray-600 px-3 py-1 rounded-full text-sm">CSS</span>
+              <span class="bg-gray-100 text-gray-600 px-3 py-1 rounded-full text-sm">JavaScript</span>
+            </div>
+            <div class="flex items-center justify-between">
+              <a
+                href="https://919itllc.com"
+                class="text-red-orange hover:text-ebony transition-colors duration-200 font-medium flex items-center"
+                target="_blank"
+              >
+                Visit Website
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-1" viewBox="0 0 20 20" fill="currentColor">
+                  <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                </svg>
+              </a>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="bg-white rounded-lg shadow-md p-6 hidden">
-        <img
-          src="https://source.unsplash.com/random/401x201"
-          alt="Portfolio2 DC"
-          class="mb-4 rounded-md w-full h-48 object-cover"
-        />
-        <h2 class="text-2xl font-semibold text-ebony mb-2">Portfolio2 DC</h2>
-        <p class="text-ebony text-sm mb-4">
-          Comentario relacionado con el desarrollo de Portfolio2 DC. Este
-          proyecto fue desarrollado utilizando Astro, HTML, CSS y JavaScript.
-        </p>
-        <div class="flex items-center justify-between">
-          <a href="#" class="text-red-orange hover:underline">GitHub</a>
-          <span class="text-gray-500 text-xs">Astro, HTML, CSS, JavaScript</span
-          >
+
+      <!-- Experiencia Laboral -->
+      <h2 class="text-3xl font-bold text-ebony mb-8 text-center">Experience</h2>
+      
+      <div class="space-y-8">
+        <!-- 919it LLC -->
+        <div class="bg-white rounded-lg shadow-md p-8 hover:shadow-lg transition-shadow duration-300">
+          <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
+            <div>
+              <h3 class="text-2xl font-semibold text-ebony">919it LLC</h3>
+              <p class="text-xl text-red-orange">Freelance Software Engineer | QA Automation Specialist</p>
+            </div>
+            <div class="text-gray-600 mt-2 md:mt-0">
+              <p>May 2016 - Present (8 years 11 months)</p>
+              <p class="text-sm">Sheridan, Wyoming, Estados Unidos</p>
+            </div>
+          </div>
+          <p class="text-gray-600">
+            As a Freelance Software Engineer and QA Automation Specialist, I have
+            collaborated with diverse clients to deliver high-quality software
+            solutions and robust testing frameworks. My expertise spans both
+            development and quality assurance, ensuring seamless functionality and
+            performance across applications.
+          </p>
+        </div>
+
+        <!-- Venon Solutions -->
+        <div class="bg-white rounded-lg shadow-md p-8 hover:shadow-lg transition-shadow duration-300">
+          <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
+            <div>
+              <h3 class="text-2xl font-semibold text-ebony">Venon Solutions</h3>
+              <p class="text-xl text-red-orange">QA Test Engineer</p>
+            </div>
+            <div class="text-gray-600 mt-2 md:mt-0">
+              <p>August 2022 - August 2024 (2 years 1 month)</p>
+              <p class="text-sm">Miami, Florida, Estados Unidos</p>
+            </div>
+          </div>
+          <p class="text-gray-600">
+            Specialized in testing web applications for the financial sector,
+            ensuring data accuracy, security, and user-friendly interfaces for
+            both administrative and client-facing platforms.
+          </p>
+        </div>
+
+        <!-- CTI Consulting -->
+        <div class="bg-white rounded-lg shadow-md p-8 hover:shadow-lg transition-shadow duration-300">
+          <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
+            <div>
+              <h3 class="text-2xl font-semibold text-ebony">CTI Consulting</h3>
+              <p class="text-xl text-red-orange">Sr Quality/Automation Engineer</p>
+            </div>
+            <div class="text-gray-600 mt-2 md:mt-0">
+              <p>January 2021 - December 2022 (2 years)</p>
+              <p class="text-sm">Miami, Florida, Estados Unidos</p>
+            </div>
+          </div>
+          <p class="text-gray-600">
+            Focused on eCommerce platforms, optimizing order fulfillment processes
+            through automated testing and quality assurance.
+          </p>
+        </div>
+
+        <!-- Speeron -->
+        <div class="bg-white rounded-lg shadow-md p-8 hover:shadow-lg transition-shadow duration-300">
+          <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
+            <div>
+              <h3 class="text-2xl font-semibold text-ebony">Speeron</h3>
+              <p class="text-xl text-red-orange">Sr Quality/Automation Engineer leader</p>
+            </div>
+            <div class="text-gray-600 mt-2 md:mt-0">
+              <p>March 2018 - March 2022 (4 years 1 month)</p>
+              <p class="text-sm">Stockholm, Sweden</p>
+            </div>
+          </div>
+          <p class="text-gray-600">
+            Specialized in software testing for the hospitality industry,
+            including Point of Sale (POS) systems, payment gateways, and room
+            scheduling applications.
+          </p>
+        </div>
+
+        <!-- Intergrupo -->
+        <div class="bg-white rounded-lg shadow-md p-8 hover:shadow-lg transition-shadow duration-300">
+          <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
+            <div>
+              <h3 class="text-2xl font-semibold text-ebony">Intergrupo (Software One)</h3>
+              <p class="text-xl text-red-orange">Sr Quality Engineer</p>
+            </div>
+            <div class="text-gray-600 mt-2 md:mt-0">
+              <p>January 2015 - December 2018 (4 years)</p>
+              <p class="text-sm">Bogotá D.C., Colombia</p>
+            </div>
+          </div>
+          <p class="text-gray-600">
+            Worked across healthcare, telecommunications, and finance sectors,
+            ensuring quality in complex systems like medical appointment
+            applications and data warehouses.
+          </p>
+        </div>
+
+        <!-- Q-Vision -->
+        <div class="bg-white rounded-lg shadow-md p-8 hover:shadow-lg transition-shadow duration-300">
+          <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
+            <div>
+              <h3 class="text-2xl font-semibold text-ebony">Q-Vision</h3>
+              <p class="text-xl text-red-orange">Test Analyst Intermediate</p>
+            </div>
+            <div class="text-gray-600 mt-2 md:mt-0">
+              <p>January 2014 - December 2015 (2 years)</p>
+              <p class="text-sm">Bogotá D.C., Colombia</p>
+            </div>
+          </div>
+          <p class="text-gray-600">
+            Focused on eCommerce platforms, ensuring seamless functionality for
+            product search, shopping cart management, and payment gateways.
+          </p>
+        </div>
+
+        <!-- BolColombia -->
+        <div class="bg-white rounded-lg shadow-md p-8 hover:shadow-lg transition-shadow duration-300">
+          <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
+            <div>
+              <h3 class="text-2xl font-semibold text-ebony">BolColombia</h3>
+              <p class="text-xl text-red-orange">Software developer .Net - PHP</p>
+            </div>
+            <div class="text-gray-600 mt-2 md:mt-0">
+              <p>January 2012 - December 2014 (3 years)</p>
+              <p class="text-sm">Bogotá D.C., Colombia</p>
+            </div>
+          </div>
+          <p class="text-gray-600">
+            Developed web and mobile applications for door-to-door sales
+            operations, integrating real-time data collection and order
+            processing.
+          </p>
+        </div>
+
+        <!-- Data Tools S.A -->
+        <div class="bg-white rounded-lg shadow-md p-8 hover:shadow-lg transition-shadow duration-300">
+          <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
+            <div>
+              <h3 class="text-2xl font-semibold text-ebony">Data Tools S.A</h3>
+              <p class="text-xl text-red-orange">Test Analyst junior</p>
+            </div>
+            <div class="text-gray-600 mt-2 md:mt-0">
+              <p>January 2010 - December 2012 (3 years)</p>
+              <p class="text-sm">Bogotá D.C., Colombia</p>
+            </div>
+          </div>
+          <p class="text-gray-600">
+            Focused on manual testing for transportation and traffic violation
+            management systems.
+          </p>
         </div>
       </div>
-      <div class="bg-white rounded-lg shadow-md p-6 hidden">
-        <img
-          src="https://source.unsplash.com/random/402x202"
-          alt="Portfolio3 DC"
-          class="mb-4 rounded-md w-full h-48 object-cover"
-        />
-        <h2 class="text-2xl font-semibold text-ebony mb-2">Portfolio3 DC</h2>
-        <p class="text-ebony text-sm mb-4">
-          Comentario relacionado con el desarrollo de Portfolio3 DC. Este
-          proyecto fue desarrollado utilizando Astro, HTML, CSS y JavaScript.
+
+      <!-- Sección de Contacto -->
+      <div class="text-center mt-16">
+        <h2 class="text-2xl font-semibold text-ebony mb-4">Interested in working together?</h2>
+        <p class="text-gray-600 mb-8">
+          I'm available for new projects and collaborations. Let's talk about your next project!
         </p>
-        <div class="flex items-center justify-between">
-          <a href="#" class="text-red-orange hover:underline">GitHub</a>
-          <span class="text-gray-500 text-xs">Astro, HTML, CSS, JavaScript</span
-          >
-        </div>
-      </div>
-    </div>
-    <div class="container mx-auto p-4 mt-10">
-      <div class="mb-10">
         <ContactButton />
       </div>
-      <h1 class="text-2xl font-semibold text-ebony mb-10">Experience</h1>
-      <div class="text-lg text-ebony leading-relaxed mb-10">
-        <h1 class="text-2xl font-semibold">919it LLC</h1>
-        <p class="text-2xl font-semibold">
-          Freelance Software Engineer | QA Automation Specialist
-        </p>
-        <p class="font-normal">May de 2016 - Present (8 años 11 meses)</p>
-        <p class="font-extralight text-gray-400">
-          Bogotá, Capital District, Colombia
-        </p>
-        <p>
-          As a Freelance Software Engineer and QA Automation Specialist, I have
-          collaborated with diverse clients to deliver high-quality software
-          solutions and robust testing frameworks. My expertise spans both
-          development and quality assurance, ensuring seamless functionality and
-          performance across applications
-        </p>
-      </div>
-      <div class="text-lg text-ebony leading-relaxed mb-10">
-        <h1 class="text-2xl font-semibold">Venon Solutions</h1>
-        <p class="text-2xl font-semibold">QA Test Engineer</p>
-        <p class="font-normal">
-          August de 2022 - August de 2024 (2 años 1 mes)
-        </p>
-        <p class="font-extralight text-gray-400">
-          Provincia de Buenos Aires, Argentina
-        </p>
-        <p>
-          Specialized in testing web applications for the financial sector,
-          ensuring data accuracy, security, and user-friendly interfaces for
-          both administrative and client-facing platforms.
-        </p>
-      </div>
-      <div class="text-lg text-ebony leading-relaxed mb-10">
-        <h1 class="text-2xl font-semibold">CTI Consulting</h1>
-        <p class="text-2xl font-semibold">Sr Quality/Automation Engineer</p>
-        <p class="font-normal">January de 2021 - December de 2022 (2 años)</p>
-        <p class="font-extralight text-gray-400">
-          Miami, Florida, Estados Unidos
-        </p>
-        <p>
-          Focused on eCommerce platforms, optimizing order fulfillment processes
-          through automated testing and quality assurance.
-        </p>
-      </div>
-      <div class="text-lg text-ebony leading-relaxed mb-10">
-        <h1 class="text-2xl font-semibold">Speeron</h1>
-        <p class="text-2xl font-semibold">
-          Sr Quality/Automation Engineer leader
-        </p>
-        <p class="font-normal">March de 2018 - March de 2022 (4 años 1 mes)</p>
-        <p class="font-extralight text-gray-400">Stockholm, Sweden</p>
-        <p>
-          Specialized in software testing for the hospitality industry,
-          including Point of Sale (POS) systems, payment gateways, and room
-          scheduling applications.
-        </p>
-      </div>
-      <div class="text-lg text-ebony leading-relaxed mb-10">
-        <h1 class="text-2xl font-semibold">Intergrupo (Software One)</h1>
-        <p class="text-2xl font-semibold">Sr Quality Engineer</p>
-        <p class="font-normal">January de 2015 - December de 2018 (4 años)</p>
-        <p class="font-extralight text-gray-400">Bogotá D.C., Colombia</p>
-        <p>
-          Worked across healthcare, telecommunications, and finance sectors,
-          ensuring quality in complex systems like medical appointment
-          applications and data warehouses.
-        </p>
-      </div>
-      <div class="text-lg text-ebony leading-relaxed mb-10">
-        <h1 class="text-2xl font-semibold">Q-Vision</h1>
-        <p class="text-2xl font-semibold">Test Analyst Intermediate</p>
-        <p class="font-normal">January de 2014 - December de 2015 (2 años)</p>
-        <p class="font-extralight text-gray-400">Bogotá D.C., Colombia</p>
-        <p>
-          Focused on eCommerce platforms, ensuring seamless functionality for
-          product search, shopping cart management, and payment gateways.
-        </p>
-      </div>
-      <div class="text-lg text-ebony leading-relaxed mb-10">
-        <h1 class="text-2xl font-semibold">BolColombia</h1>
-        <p class="text-2xl font-semibold">Software developer .Net - PHP</p>
-        <p class="font-normal">January de 2012 - December de 2014 (3 años)</p>
-        <p class="font-extralight text-gray-400">Bogotá D.C., Colombia</p>
-        <p>
-          Developed web and mobile applications for door-to-door sales
-          operations, integrating real-time data collection and order
-          processing.
-        </p>
-      </div>
-      <div class="text-lg text-ebony leading-relaxed mb-10">
-        <h1 class="text-2xl font-semibold">Data Tools S.A</h1>
-        <p class="text-2xl font-semibold">Test Analyst junior</p>
-        <p class="font-normal">January de 2010 - December de 2012 (3 años)</p>
-        <p class="font-extralight text-gray-400">Bogotá D.C., Colombia</p>
-        <p>
-          Focused on manual testing for transportation and traffic violation
-          management systems.
-        </p>
-      </div>
-    </div>
-    <div>
-      <ContactButton />
     </div>
   </div>
 </Layout>

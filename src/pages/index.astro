@@ -8,22 +8,75 @@ import "../styles/global.css";
 ---
 
 <Layout>
-  <div class="flex flex-col items-center justify-center min-h-screen p-4">
-    <div class="mb-8">
+  <div class="flex flex-col items-center justify-center min-h-screen bg-gradient-to-b from-white to-gray-50 pt-30">
+    <div class="mb-8 animate-float">
       <img
         class="max-w-full h-auto md:h-96"
         src="../assets/image/diego-chacon.png"
         alt="Diego Chacon"
       />
     </div>
-    <div class="text-center mb-8">
-      <p class="text-lg md:text-xl text-ebony leading-relaxed">
-        Review my service offerings and discover how I can assist in
-        guaranteeing your software's reliability.
+    <div class="text-center mb-8 max-w-2xl mx-auto">
+      <p class="text-lg md:text-xl text-ebony leading-relaxed animate-slide-up">
+        Transforming ideas into robust and reliable software. 
+        Specialized in developing technological solutions that drive your business success.
+        Ready to take your project to the next level?
       </p>
     </div>
-    <div>
+    <div class="animate-bounce-slow">
       <ContactButton />
     </div>
   </div>
 </Layout>
+
+<style>
+  .animate-fade-in {
+    animation: fadeIn 1s ease-in;
+  }
+
+  .animate-slide-up {
+    animation: slideUp 1s ease-out;
+  }
+
+  .animate-bounce-slow {
+    animation: bounce 2s infinite;
+  }
+
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes slideUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes bounce {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-15px);
+    }
+  }
+</style>
