@@ -11,24 +11,109 @@
             />
           </a>
         </li>
-        <div class="flex items-center space-x-4 md:space-x-8">
+        
+        <!-- Mobile menu button -->
+        <button
+          id="mobile-menu-button"
+          class="md:hidden p-2 rounded-md hover:bg-gray-100 focus:outline-none"
+          aria-label="Toggle menu"
+        >
+          <svg
+            class="h-6 w-6 text-ebony"
+            fill="none"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path d="M4 6h16M4 12h16M4 18h16"></path>
+          </svg>
+        </button>
+
+        <!-- Desktop menu -->
+        <div class="hidden md:flex items-center space-x-8">
           <li class="transition-transform duration-200 ease-in-out transform hover:scale-105">
-            <a href="/" class="text-ebony hover:text-red-orange font-medium text-sm md:text-base">Home</a>
+            <a href="/" class="text-ebony hover:text-red-orange font-medium text-base">Home</a>
           </li>
           <li class="transition-transform duration-200 ease-in-out transform hover:scale-105">
-            <a href="/about" class="text-ebony hover:text-red-orange font-medium text-sm md:text-base">About</a>
+            <a href="/about" class="text-ebony hover:text-red-orange font-medium text-base">About</a>
           </li>
           <li class="transition-transform duration-200 ease-in-out transform hover:scale-105">
-            <a href="/services" class="text-ebony hover:text-red-orange text-sm md:text-base">Services</a>
+            <a href="/services" class="text-ebony hover:text-red-orange text-base">Services</a>
           </li>
           <li class="transition-transform duration-200 ease-in-out transform hover:scale-105">
-            <a href="/portfolio" class="text-ebony hover:text-red-orange text-sm md:text-base">Portfolio</a>
+            <a href="/portfolio" class="text-ebony hover:text-red-orange text-base">Portfolio</a>
           </li>
           <li class="transition-transform duration-200 ease-in-out transform hover:scale-105">
-            <a href="/contact" class="text-ebony hover:text-red-orange text-sm md:text-base">Contact</a>
+            <a href="/contact" class="text-ebony hover:text-red-orange text-base">Contact</a>
+          </li>
+          <li class="transition-transform duration-200 ease-in-out transform hover:scale-105">
+            <a 
+              href="/assets/cv/AQA Engineer CV Diego Chacon - EN.pdf" 
+              download
+              class="bg-red-orange text-white px-4 py-2 rounded-md text-base hover:bg-ebony transition-colors duration-200 flex items-center"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+              </svg>
+              Download CV
+            </a>
           </li>
         </div>
       </ul>
+
+      <!-- Mobile menu -->
+      <div
+        id="mobile-menu"
+        class="hidden md:hidden absolute top-full left-0 right-0 bg-white shadow-lg rounded-b-lg py-2 px-4"
+      >
+        <div class="flex flex-col space-y-4">
+          <a href="/" class="text-ebony hover:text-red-orange font-medium text-base py-2 transition-colors duration-200 hover:bg-gray-50 rounded-md px-2">Home</a>
+          <a href="/about" class="text-ebony hover:text-red-orange font-medium text-base py-2 transition-colors duration-200 hover:bg-gray-50 rounded-md px-2">About</a>
+          <a href="/services" class="text-ebony hover:text-red-orange text-base py-2 transition-colors duration-200 hover:bg-gray-50 rounded-md px-2">Services</a>
+          <a href="/portfolio" class="text-ebony hover:text-red-orange text-base py-2 transition-colors duration-200 hover:bg-gray-50 rounded-md px-2">Portfolio</a>
+          <a href="/contact" class="text-ebony hover:text-red-orange text-base py-2 transition-colors duration-200 hover:bg-gray-50 rounded-md px-2">Contact</a>
+          <a 
+            href="/assets/cv/AQA Engineer CV Diego Chacon - EN.pdf" 
+            download
+            class="bg-red-orange text-white px-4 py-2 rounded-md text-base hover:bg-ebony transition-colors duration-200 flex items-center justify-center hover:scale-105 transform"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+            </svg>
+            Download CV
+          </a>
+        </div>
+      </div>
     </div>
   </nav>
 </div>
+
+<script>
+  // Mobile menu functionality
+  const mobileMenuButton = document.getElementById('mobile-menu-button');
+  const mobileMenu = document.getElementById('mobile-menu');
+
+  mobileMenuButton?.addEventListener('click', () => {
+    mobileMenu?.classList.toggle('hidden');
+  });
+
+  // Close mobile menu when clicking outside
+  document.addEventListener('click', (event) => {
+    if (
+      mobileMenu &&
+      !mobileMenu.contains(event.target as Node) &&
+      !mobileMenuButton?.contains(event.target as Node)
+    ) {
+      mobileMenu.classList.add('hidden');
+    }
+  });
+
+  // Close mobile menu when window is resized to desktop size
+  window.addEventListener('resize', () => {
+    if (window.innerWidth >= 768) { // md breakpoint
+      mobileMenu?.classList.add('hidden');
+    }
+  });
+</script>
