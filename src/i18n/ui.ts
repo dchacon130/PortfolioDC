@@ -126,10 +126,10 @@ export interface UiCopy {
     messageLabel: string;
     messagePlaceholder: string;
     submitButton: string;
+    sendingButton: string;
     noSpam: string;
     statusMailtoPrefix: string;
     statusSuccess: string;
-    statusRedirecting: string;
     statusSubmitError: string;
     statusNetworkError: string;
   };
@@ -268,10 +268,10 @@ export const uiCopy: Record<Locale, UiCopy> = {
       messageLabel: 'Message',
       messagePlaceholder: 'Tell me about the role, team, or testing challenge...',
       submitButton: 'Send message',
+      sendingButton: 'Sending...',
       noSpam: 'No spam // Direct reply',
       statusMailtoPrefix: 'Opening your email app to send this message to',
       statusSuccess: 'Message sent. Thank you for reaching out—I will reply shortly.',
-      statusRedirecting: 'Completing security verification via Formspree...',
       statusSubmitError: 'Could not submit via form right now. Please email',
       statusNetworkError: 'Network error while sending. Please email',
     },
@@ -408,10 +408,10 @@ export const uiCopy: Record<Locale, UiCopy> = {
       messageLabel: 'Mensaje',
       messagePlaceholder: 'Cuéntame sobre el rol, el equipo o el reto de pruebas...',
       submitButton: 'Enviar mensaje',
+      sendingButton: 'Enviando...',
       noSpam: 'Sin spam // Respuesta directa',
       statusMailtoPrefix: 'Abriendo tu aplicación de correo para enviar el mensaje a',
       statusSuccess: 'Mensaje enviado. Gracias por escribir—responderé pronto.',
-      statusRedirecting: 'Completando verificación de seguridad en Formspree...',
       statusSubmitError: 'No se pudo enviar por el formulario en este momento. Escríbeme a',
       statusNetworkError: 'Error de red al enviar. Por favor escribe directamente a',
     },
