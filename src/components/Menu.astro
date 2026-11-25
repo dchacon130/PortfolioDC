@@ -1,119 +1,207 @@
-<div class="fixed top-0 left-0 right-0 z-50">
-  <nav class="py-2 px-4 md:px-8 bg-transparent backdrop-blur-sm">
-    <div class="max-w-7xl mx-auto">
-      <ul class="flex items-center justify-between">
-        <li>
-          <a href="/" class="block">
-            <img
-              class="h-8 w-8 md:h-10 md:w-10"
-              src="../assets/image/logo-dc.jpg"
-              alt="DC Logo"
-            />
-          </a>
-        </li>
-        
-        <!-- Mobile menu button -->
-        <button
-          id="mobile-menu-button"
-          class="md:hidden p-2 rounded-md hover:bg-gray-100 focus:outline-none"
-          aria-label="Toggle menu"
-        >
-          <svg
-            class="h-6 w-6 text-ebony"
-            fill="none"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path d="M4 6h16M4 12h16M4 18h16"></path>
-          </svg>
-        </button>
+---
+import { profile } from "../data/profile";
 
-        <!-- Desktop menu -->
-        <div class="hidden md:flex items-center space-x-8">
-          <li class="transition-transform duration-200 ease-in-out transform hover:scale-105">
-            <a href="/" class="text-ebony hover:text-red-orange font-medium text-base">Home</a>
-          </li>
-          <li class="transition-transform duration-200 ease-in-out transform hover:scale-105">
-            <a href="/about" class="text-ebony hover:text-red-orange font-medium text-base">About</a>
-          </li>
-          <li class="transition-transform duration-200 ease-in-out transform hover:scale-105">
-            <a href="/services" class="text-ebony hover:text-red-orange text-base">Services</a>
-          </li>
-          <li class="transition-transform duration-200 ease-in-out transform hover:scale-105">
-            <a href="/portfolio" class="text-ebony hover:text-red-orange text-base">Portfolio</a>
-          </li>
-          <li class="transition-transform duration-200 ease-in-out transform hover:scale-105">
-            <a href="/contact" class="text-ebony hover:text-red-orange text-base">Contact</a>
-          </li>
-          <li class="transition-transform duration-200 ease-in-out transform hover:scale-105">
-            <a 
-              href="/assets/cv/AQA Engineer CV Diego Chacon - EN.pdf" 
-              download
-              class="bg-red-orange text-white px-4 py-2 rounded-md text-base hover:bg-ebony transition-colors duration-200 flex items-center"
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-              </svg>
-              Download CV
-            </a>
-          </li>
-        </div>
+const currentPath = Astro.url.pathname.replace(/\/$/, "") || "/";
+
+function isActive(href: string): boolean {
+  const normalized = href.replace(/\/$/, "") || "/";
+  return currentPath === normalized;
+}
+---
+
+<header class="sticky top-0 z-50 border-b border-line bg-paper/90 backdrop-blur-md">
+  <!-- Thin molten accent hairline -->
+  <div class="h-[2px] w-full bg-gradient-to-r from-accent via-accent/40 to-transparent" aria-hidden="true"></div>
+
+  <div class="mx-auto flex h-16 max-w-5xl items-center justify-between px-6">
+    <!-- Brand Mark -->
+    <a
+      href="/"
+      class="group flex items-center gap-3 text-ink transition-opacity hover:opacity-90"
+      aria-label={`${profile.name} — Home`}
+    >
+      <img
+        src="/assets/brand/logo-dc.png"
+        alt="Diego Chacón logo"
+        width="28"
+        height="28"
+        class="h-7 w-7 object-contain"
+      />
+      <span class="font-display text-lg font-semibold uppercase tracking-[0.06em]">
+        {profile.name}
+      </span>
+      <span class="hidden font-mono text-xs text-muted sm:inline">// SDET</span>
+    </a>
+
+    <!-- Desktop Navigation -->
+    <nav aria-label="Primary navigation" class="hidden items-center gap-7 md:flex">
+      <ul class="flex items-center gap-7">
+        {
+          profile.navigation.map((item) => {
+            const active = isActive(item.href);
+            return (
+              <li>
+                <a
+                  href={item.href}
+                  aria-current={active ? "page" : undefined}
+                  class:list={[
+                    "relative py-1 font-mono text-xs uppercase tracking-[0.12em] transition-colors",
+                    active
+                      ? "font-medium text-ink"
+                      : "text-muted hover:text-ink",
+                  ]}
+                >
+                  {item.label}
+                  {active && (
+                    <span
+                      aria-hidden="true"
+                      class="absolute right-0 -bottom-[22px] left-0 h-[2px] bg-accent"
+                    />
+                  )}
+                </a>
+              </li>
+            );
+          })
+        }
       </ul>
 
-      <!-- Mobile menu -->
-      <div
-        id="mobile-menu"
-        class="hidden md:hidden absolute top-full left-0 right-0 bg-white shadow-lg rounded-b-lg py-2 px-4"
+      <a
+        href={profile.cvPath}
+        download={profile.cvDownloadName}
+        class="inline-flex items-center gap-1.5 rounded-[2px] border border-accent bg-accent px-3.5 py-1.5 font-mono text-xs font-medium uppercase tracking-wider text-paper transition-colors hover:border-ink hover:bg-ink"
       >
-        <div class="flex flex-col space-y-4">
-          <a href="/" class="text-ebony hover:text-red-orange font-medium text-base py-2 transition-colors duration-200 hover:bg-gray-50 rounded-md px-2">Home</a>
-          <a href="/about" class="text-ebony hover:text-red-orange font-medium text-base py-2 transition-colors duration-200 hover:bg-gray-50 rounded-md px-2">About</a>
-          <a href="/services" class="text-ebony hover:text-red-orange text-base py-2 transition-colors duration-200 hover:bg-gray-50 rounded-md px-2">Services</a>
-          <a href="/portfolio" class="text-ebony hover:text-red-orange text-base py-2 transition-colors duration-200 hover:bg-gray-50 rounded-md px-2">Portfolio</a>
-          <a href="/contact" class="text-ebony hover:text-red-orange text-base py-2 transition-colors duration-200 hover:bg-gray-50 rounded-md px-2">Contact</a>
-          <a 
-            href="/assets/cv/AQA Engineer CV Diego Chacon - EN.pdf" 
-            download
-            class="bg-red-orange text-white px-4 py-2 rounded-md text-base hover:bg-ebony transition-colors duration-200 flex items-center justify-center hover:scale-105 transform"
+        <span>CV PDF</span>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-3.5 w-3.5"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          stroke-width="2.2"
+          aria-hidden="true"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M12 4v12m0 0l-4-4m4 4l4-4M4 20h16"
+          />
+        </svg>
+      </a>
+    </nav>
+
+    <!-- Mobile Menu Toggle -->
+    <button
+      id="mobile-menu-button"
+      type="button"
+      class="inline-flex items-center justify-center rounded-[2px] border border-line-strong bg-surface p-2 text-ink transition-colors hover:border-accent md:hidden"
+      aria-label="Toggle navigation menu"
+      aria-expanded="false"
+      aria-controls="mobile-menu"
+    >
+      <svg
+        id="menu-icon-open"
+        class="h-5 w-5"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+        stroke-width="1.75"
+        aria-hidden="true"
+      >
+        <path stroke-linecap="round" stroke-linejoin="round" d="M4 7h16M4 12h16M4 17h16" />
+      </svg>
+      <svg
+        id="menu-icon-close"
+        class="hidden h-5 w-5"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+        stroke-width="1.75"
+        aria-hidden="true"
+      >
+        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+      </svg>
+    </button>
+  </div>
+
+  <!-- Mobile Navigation Drawer -->
+  <div
+    id="mobile-menu"
+    class="hidden border-t border-line bg-surface px-6 py-5 md:hidden"
+  >
+    <nav aria-label="Mobile navigation" class="flex flex-col gap-1">
+      {
+        profile.navigation.map((item) => {
+          const active = isActive(item.href);
+          return (
+            <a
+              href={item.href}
+              aria-current={active ? "page" : undefined}
+              class:list={[
+                "flex items-center justify-between rounded-[2px] px-2.5 py-2.5 font-mono text-xs uppercase tracking-[0.12em] transition-colors",
+                active
+                  ? "bg-subtle font-medium text-ink"
+                  : "text-muted hover:bg-subtle/60 hover:text-ink",
+              ]}
+            >
+              <span>{item.label}</span>
+              {active && <span class="h-1.5 w-1.5 bg-accent" />}
+            </a>
+          );
+        })
+      }
+
+      <div class="mt-3 border-t border-line pt-4">
+        <a
+          href={profile.cvPath}
+          download={profile.cvDownloadName}
+          class="flex w-full items-center justify-center gap-2 rounded-[2px] bg-accent px-4 py-2.5 font-mono text-xs font-medium uppercase tracking-wider text-paper transition-colors hover:bg-ink"
+        >
+          <span>Download Resume (PDF)</span>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-3.5 w-3.5"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            stroke-width="2.2"
+            aria-hidden="true"
           >
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-            </svg>
-            Download CV
-          </a>
-        </div>
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M12 4v12m0 0l-4-4m4 4l4-4M4 20h16"
+            />
+          </svg>
+        </a>
       </div>
-    </div>
-  </nav>
-</div>
+    </nav>
+  </div>
+</header>
 
 <script>
-  // Mobile menu functionality
-  const mobileMenuButton = document.getElementById('mobile-menu-button');
-  const mobileMenu = document.getElementById('mobile-menu');
+  const button = document.getElementById("mobile-menu-button");
+  const menu = document.getElementById("mobile-menu");
+  const iconOpen = document.getElementById("menu-icon-open");
+  const iconClose = document.getElementById("menu-icon-close");
 
-  mobileMenuButton?.addEventListener('click', () => {
-    mobileMenu?.classList.toggle('hidden');
+  function setMenuOpen(open: boolean) {
+    if (!button || !menu) return;
+    menu.classList.toggle("hidden", !open);
+    iconOpen?.classList.toggle("hidden", open);
+    iconClose?.classList.toggle("hidden", !open);
+    button.setAttribute("aria-expanded", String(open));
+  }
+
+  button?.addEventListener("click", () => {
+    const isOpen = button.getAttribute("aria-expanded") === "true";
+    setMenuOpen(!isOpen);
   });
 
-  // Close mobile menu when clicking outside
-  document.addEventListener('click', (event) => {
-    if (
-      mobileMenu &&
-      !mobileMenu.contains(event.target as Node) &&
-      !mobileMenuButton?.contains(event.target as Node)
-    ) {
-      mobileMenu.classList.add('hidden');
-    }
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") setMenuOpen(false);
   });
 
-  // Close mobile menu when window is resized to desktop size
-  window.addEventListener('resize', () => {
-    if (window.innerWidth >= 768) { // md breakpoint
-      mobileMenu?.classList.add('hidden');
-    }
+  window.addEventListener("resize", () => {
+    if (window.innerWidth >= 768) setMenuOpen(false);
   });
 </script>

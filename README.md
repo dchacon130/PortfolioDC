@@ -1,111 +1,114 @@
-# Portfolio DC
+# Portfolio DC (v2)
 
-A modern and responsive portfolio website built with Astro, showcasing my work as a Software Developer and QA Engineer.
+Minimalist, editorial personal portfolio for **Diego Chacón — Senior QA Automation Engineer / SDET** (`Playwright · TypeScript · API · Mobile & OTT`).
 
-## 🚀 Features
+Built with **Astro 5**, **Tailwind CSS v4**, and **TypeScript** with a data-driven architecture and zero client-side framework runtime.
 
-- **Modern Design**: Clean and professional interface with smooth animations
-- **Responsive**: Fully responsive design that works on all devices
-- **Fast Performance**: Built with Astro for optimal performance
-- **SEO Friendly**: Optimized for search engines
-- **Dark/Light Mode**: Support for both dark and light themes
-- **Contact Form**: Interactive contact form for easy communication
-- **Project Showcase**: Dedicated section to showcase projects
-- **Social Integration**: Links to professional social media profiles
+---
 
-## 🛠️ Technologies
+## Quick Editing Guide (Where to Edit Everything)
 
-- [Astro](https://astro.build/) - Modern static site builder
-- [Tailwind CSS](https://tailwindcss.com/) - Utility-first CSS framework
-- [TypeScript](https://www.typescriptlang.org/) - Type-safe JavaScript
-- [Vercel](https://vercel.com/) - Deployment platform
+All site content is intentionally separated from UI layout so you can update text, experience, skills, projects, or colors without digging into page templates:
 
-## 📦 Installation
+| What you want to change | File to edit |
+| :--- | :--- |
+| Name, role, tagline, email, socials, availability badge, metrics, contact form endpoint | [`src/data/profile.ts`](src/data/profile.ts) |
+| Work experience, client engagements, dates, early career | [`src/data/experience.ts`](src/data/experience.ts) |
+| QA/SDET case studies & web projects | [`src/data/projects.ts`](src/data/projects.ts) |
+| Technical skills (7 categories), certifications, education & languages | [`src/data/skills.ts`](src/data/skills.ts) |
+| Consulting services & deliverables | [`src/data/services.ts`](src/data/services.ts) |
+| Colors (`--color-paper`, `--color-ink`, `--color-accent`, etc.) & fonts | [`src/styles/global.css`](src/styles/global.css) |
+| Downloadable Resume PDF | `public/assets/cv/Diego-Chacon-SDET-CV.pdf` *(update `cvPath` in `src/data/profile.ts` if renamed)* |
+| Brand logo, favicon & Open Graph banner | `public/assets/brand/logo-dc.png`, `public/favicon.svg`, `public/assets/brand/og-banner.png` ([edit in Canva](https://canva.link/jqsob1lscv5351l)) |
+| SEO meta tags, `<title>`, Open Graph, Google Fonts | [`src/layouts/Layout.astro`](src/layouts/Layout.astro) |
+| Top navigation bar & mobile drawer | [`src/components/Menu.astro`](src/components/Menu.astro) |
+| Footer links & copyright | [`src/components/Footer.astro`](src/components/Footer.astro) |
+| Playwright E2E suite & CI pipeline | `tests/e2e/`, `playwright.config.ts`, [`.github/workflows/ci.yml`](.github/workflows/ci.yml) |
 
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/yourusername/portfolio-dc.git
-   ```
+---
 
-2. Install dependencies:
-   ```bash
-   npm install
-   ```
+## Project Structure
 
-3. Start the development server:
-   ```bash
-   npm run dev
-   ```
-
-4. Build for production:
-   ```bash
-   npm run build
-   ```
-
-## 🏗️ Project Structure
-
-```
-portfolio-dc/
+```text
+PortfolioDC/
 ├── public/
-│   └── assets/
-│       ├── image/
-│       └── icons/
+│   ├── assets/
+│   │   ├── brand/logo-dc.png
+│   │   ├── cv/Diego-Chacon-SDET-CV.pdf
+│   │   └── image/919it-web-background.png
+│   ├── favicon.svg
+│   └── robots.txt
 ├── src/
 │   ├── components/
+│   │   ├── Footer.astro
+│   │   ├── Menu.astro
+│   │   └── SectionHeader.astro
+│   ├── data/
+│   │   ├── experience.ts
+│   │   ├── profile.ts
+│   │   ├── projects.ts
+│   │   ├── services.ts
+│   │   └── skills.ts
 │   ├── layouts/
+│   │   └── Layout.astro
 │   ├── pages/
+│   │   ├── index.astro       # Home
+│   │   ├── portfolio.astro   # Case Studies, Career Timeline & Web Projects
+│   │   ├── about.astro       # Bio, 7-Category Tech Matrix & Certifications
+│   │   ├── services.astro    # QA & SDET Consulting Offerings
+│   │   └── contact.astro     # Direct Channels & Contact Form
 │   └── styles/
+│       └── global.css        # Design tokens & Tailwind v4 entry
 ├── astro.config.mjs
 ├── package.json
-├── tailwind.config.mjs
 └── tsconfig.json
 ```
 
-## 🎨 Customization
+---
 
-### Colors
-The project uses a custom color palette defined in `tailwind.config.mjs`:
-- Primary: Red-Orange (#FF4D4D)
-- Secondary: Ebony (#1A1A1A)
-- Background: White to Gray-50 gradient
+## Commands
 
-### Components
-Key components are located in `src/components/`:
-- `ContactButton.astro` - Reusable contact button
-- `Navbar.astro` - Navigation bar
-- `Footer.astro` - Site footer
+```bash
+# Install dependencies
+npm install
 
-## 📱 Responsive Design
+# Start local dev server (http://localhost:4321)
+npm run dev
 
-The website is fully responsive with breakpoints:
-- Mobile: < 640px
-- Tablet: 640px - 1024px
-- Desktop: > 1024px
+# Build static production site to dist/
+npm run build
 
-## 🚀 Deployment
+# Preview production build locally
+npm run preview
 
-The site is deployed on Vercel and can be accessed at [portfolio-dc.vercel.app](https://portfolio-dc.vercel.app)
+# Run Playwright E2E test suite (desktop + mobile)
+npm run test:e2e
 
-## 🤝 Contributing
+# Run fast @smoke E2E subset only
+npm run test:e2e:smoke
 
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
+# Open interactive Playwright UI / HTML report
+npm run test:e2e:ui
+npm run test:e2e:report
+```
 
-## 📝 License
+---
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+## Contact Form
 
-## 👤 Contact
+The `/contact` page is connected to **Formspree** (`contactFormEndpoint` in [`src/data/profile.ts`](src/data/profile.ts)) with honeypot spam protection, async submission states, and graceful fallback guidance. To swap providers or disable it, update `contactFormEndpoint` in [`src/data/profile.ts`](src/data/profile.ts).
 
-Diego Chacon - [@DiegoChacon20](https://twitter.com/DiegoChacon20)
+---
 
-Project Link: [https://github.com/yourusername/portfolio-dc](https://github.com/yourusername/portfolio-dc)
+## Roadmap & Task Tracking
 
-## 🙏 Acknowledgments
+Active tasks and backlog items are tracked in [GitHub Project #5 — Portfolio DC](https://github.com/users/dchacon130/projects/5) and [GitHub Issues](https://github.com/dchacon130/PortfolioDC/issues).
 
-- [Astro Documentation](https://docs.astro.build/)
-- [Tailwind CSS Documentation](https://tailwindcss.com/docs)
-- [Heroicons](https://heroicons.com/) for SVG icons
+---
+
+## Contact
+
+- **Diego Chacón** — Senior QA Automation Engineer / SDET
+- Email: [dchacon130@gmail.com](mailto:dchacon130@gmail.com)
+- LinkedIn: [linkedin.com/in/dchacon130](https://www.linkedin.com/in/dchacon130/)
+- GitHub: [github.com/dchacon130](https://github.com/dchacon130)

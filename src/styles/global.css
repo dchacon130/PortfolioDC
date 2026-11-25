@@ -1,8 +1,86 @@
 @import "tailwindcss";
 
+/**
+ * ============================================================================
+ * DESIGN TOKENS — Heavy Metal Minimalist Palette
+ * Edit these variables to adjust colors or typography across the entire site.
+ * ============================================================================
+ */
 @theme {
-    --color-midnight-blue: #00478f;
-    --color-red-orange: #ff5d00;
-    --color-ebony: #1A1A1A;
-    --color-misty-blue: #d8e1e7;
+  /* Core surfaces: forged obsidian & brushed gunmetal */
+  --color-paper: #0B0B0C;
+  --color-surface: #141416;
+  --color-subtle: #1D1D21;
+
+  /* Ink & metallic silver hierarchy */
+  --color-ink: #F2F2F0;
+  --color-metal: #C8CCD4;
+  --color-muted: #9A9AA3;
+
+  /* Machined hairline borders */
+  --color-line: #27272C;
+  --color-line-strong: #3E3E46;
+
+  /* Molten forge orange accent */
+  --color-accent: #FF4D00;
+  --color-accent-hover: #FF6A29;
+  --color-accent-soft: rgba(255, 77, 0, 0.14);
+
+  /* Typography */
+  --font-display: "Oswald", "Arial Narrow", Impact, sans-serif;
+  --font-sans: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
+
+@layer base {
+  html {
+    background-color: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    color-scheme: dark;
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+    background-color: var(--color-paper);
+    color: var(--color-ink);
+    display: flex;
+    flex-direction: column;
+    background-image: radial-gradient(
+      ellipse 70% 35% at 50% -10%,
+      rgba(255, 77, 0, 0.08),
+      transparent 70%
+    );
+  }
+
+  ::selection {
+    background-color: var(--color-accent);
+    color: var(--color-paper);
+  }
+}
+
+/* Sharp editorial reveal */
+@keyframes metalReveal {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.reveal {
+  animation: metalReveal 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    animation: none;
+  }
 }
