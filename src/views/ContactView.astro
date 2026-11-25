@@ -120,22 +120,16 @@ const ui = getUiCopy(locale);
 
           <form
             id="contact-form"
-            action={profile.contactFormEndpoint || undefined}
-            method={profile.contactFormEndpoint ? "POST" : undefined}
             data-endpoint={profile.contactFormEndpoint}
             data-email={profile.email}
+            data-label-submit={ui.contact.submitButton}
+            data-label-sending={ui.contact.sendingButton}
             data-msg-mailto={ui.contact.statusMailtoPrefix}
             data-msg-success={ui.contact.statusSuccess}
-            data-msg-redirecting={ui.contact.statusRedirecting}
             data-msg-submit-error={ui.contact.statusSubmitError}
             data-msg-network-error={ui.contact.statusNetworkError}
             class="mt-6 space-y-5"
           >
-            <input
-              type="hidden"
-              name="_subject"
-              value={`Portfolio Inquiry — ${profile.name}`}
-            />
             <!-- Honeypot spam trap -->
             <input
               type="text"
@@ -204,7 +198,7 @@ const ui = getUiCopy(locale);
                 type="submit"
                 class="inline-flex items-center justify-center gap-2 rounded-[2px] bg-accent px-6 py-2.5 font-mono text-xs font-medium uppercase tracking-wider text-paper transition-colors hover:bg-ink disabled:cursor-not-allowed disabled:opacity-60 cursor-pointer"
               >
-                <span>{ui.contact.submitButton}</span>
+                <span id="submit-btn-label">{ui.contact.submitButton}</span>
                 <span aria-hidden="true">→</span>
               </button>
               <p class="font-mono text-[11px] text-muted">
@@ -245,9 +239,10 @@ const ui = getUiCopy(locale);
 
   const form = document.getElementById("contact-form") as HTMLFormElement | null;
   const submitBtn = document.getElementById("submit-btn") as HTMLButtonElement | null;
+  const submitBtnLabel = document.getElementById("submit-btn-label");
   const statusEl = document.getElementById("form-status");
 
-  function showStatus(message: string, isError = false) {
+  function showStatus(message: string, variant: "success" | "error" | "info" = "info") {
     if (!statusEl) return;
     statusEl.textContent = message;
     statusEl.classList.remove(
@@ -255,12 +250,17 @@ const ui = getUiCopy(locale);
       "border-red-500/40",
       "bg-red-950/60",
       "text-red-200",
+      "border-emerald-500/40",
+      "bg-emerald-950/50",
+      "text-emerald-200",
       "border-line-strong",
       "bg-subtle",
       "text-ink"
     );
-    if (isError) {
+    if (variant === "error") {
       statusEl.classList.add("border-red-500/40", "bg-red-950/60", "text-red-200");
+    } else if (variant === "success") {
+      statusEl.classList.add("border-emerald-500/40", "bg-emerald-950/50", "text-emerald-200");
     } else {
       statusEl.classList.add("border-line-strong", "bg-subtle", "text-ink");
     }
@@ -277,9 +277,10 @@ const ui = getUiCopy(locale);
     const endpoint = (form.dataset.endpoint || "").trim();
     const targetEmail = (form.dataset.email || "").trim();
 
+    const labelSubmit = form.dataset.labelSubmit || "Send message";
+    const labelSending = form.dataset.labelSending || "Sending...";
     const msgMailto = form.dataset.msgMailto || "Opening your email app to send this message to";
     const msgSuccess = form.dataset.msgSuccess || "Message sent. Thank you for reaching out.";
-    const msgRedirecting = form.dataset.msgRedirecting || "Completing security verification via Formspree...";
     const msgSubmitError = form.dataset.msgSubmitError || "Could not submit via form right now. Please email";
     const msgNetworkError = form.dataset.msgNetworkError || "Network error while sending. Please email";
 
@@ -287,11 +288,13 @@ const ui = getUiCopy(locale);
       const subject = encodeURIComponent(`Portfolio Inquiry from ${name}`);
       const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\n${message}`);
       window.location.href = `mailto:${targetEmail}?subject=${subject}&body=${body}`;
-      showStatus(`${msgMailto} ${targetEmail}.`);
+      showStatus(`${msgMailto} ${targetEmail}.`, "info");
       return;
     }
 
     if (submitBtn) submitBtn.disabled = true;
+    if (submitBtnLabel) submitBtnLabel.textContent = labelSending;
+
     try {
       const response = await fetch(endpoint, {
         method: "POST",
@@ -309,7 +312,7 @@ const ui = getUiCopy(locale);
 
       if (response.ok) {
         form.reset();
-        showStatus(msgSuccess);
+        showStatus(msgSuccess, "success");
         return;
       }
 
@@ -328,20 +331,13 @@ const ui = getUiCopy(locale);
         // Ignore non-JSON error bodies
       }
 
-      // Formspree returns 403 when reCAPTCHA is enabled in form settings and AJAX is used.
-      // Fall back seamlessly to standard HTML POST so Formspree's hosted reCAPTCHA handles delivery.
-      if (response.status === 403 && /recaptcha/i.test(errorDetail)) {
-        showStatus(msgRedirecting);
-        form.submit();
-        return;
-      }
-
       const detailSuffix = errorDetail ? ` (${errorDetail})` : "";
-      showStatus(`${msgSubmitError} ${targetEmail}.${detailSuffix}`, true);
+      showStatus(`${msgSubmitError} ${targetEmail}.${detailSuffix}`, "error");
     } catch {
-      showStatus(`${msgNetworkError} ${targetEmail}.`, true);
+      showStatus(`${msgNetworkError} ${targetEmail}.`, "error");
     } finally {
       if (submitBtn) submitBtn.disabled = false;
+      if (submitBtnLabel) submitBtnLabel.textContent = labelSubmit;
     }
   });
 </script>
