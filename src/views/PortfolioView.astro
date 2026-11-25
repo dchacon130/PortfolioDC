@@ -1,0 +1,321 @@
+---
+import Layout from "../layouts/Layout.astro";
+import SectionHeader from "../components/SectionHeader.astro";
+import { getCaseStudies, getWebProjects } from "../data/projects";
+import { getExperience, getEarlyCareer } from "../data/experience";
+import { getProfile } from "../data/profile";
+import { getUiCopy } from "../i18n/ui";
+import { getLocalizedPath, type Locale } from "../i18n/utils";
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const profile = getProfile(locale);
+const ui = getUiCopy(locale);
+const caseStudies = getCaseStudies(locale);
+const webProjects = getWebProjects(locale);
+const experience = getExperience(locale);
+const earlyCareer = getEarlyCareer(locale);
+const contactHref = getLocalizedPath("/contact", locale);
+---
+
+<Layout
+  locale={locale}
+  title={ui.work.seoTitle}
+  description={ui.work.seoDescription}
+>
+  <!-- Page Header -->
+  <section class="mx-auto max-w-5xl px-6 pt-16 pb-12 sm:pt-20">
+    <div class="reveal">
+      <p class="font-mono text-xs uppercase tracking-[0.16em] text-muted">
+        <span class="text-accent">{ui.work.eyebrowTag}</span> // {ui.work.eyebrowSub}
+      </p>
+      <h1 class="mt-3 max-w-3xl font-display text-4xl font-bold uppercase tracking-[0.015em] text-ink sm:text-5xl lg:text-6xl">
+        {ui.work.title}
+      </h1>
+      <p class="mt-4 max-w-2xl text-base leading-relaxed text-metal">
+        {ui.work.subtitle}
+      </p>
+    </div>
+  </section>
+
+  <!-- 01 / Case Studies -->
+  <section class="mx-auto max-w-5xl px-6 py-12">
+    <SectionHeader
+      index="01"
+      label={ui.work.caseStudiesLabel}
+      title={ui.work.caseStudiesTitle}
+    />
+
+    <div class="space-y-6">
+      {
+        caseStudies.map((study) => (
+          <article
+            id={study.id}
+            class="scroll-mt-24 rounded-[2px] border border-line bg-surface p-6 transition-colors hover:border-line-strong sm:p-8"
+          >
+            <div class="flex flex-col justify-between gap-3 border-b border-line pb-5 sm:flex-row sm:items-start">
+              <div>
+                <p class="font-mono text-xs text-muted">
+                  <span class="text-accent">{study.index}</span> // {study.category} · {study.period}
+                </p>
+                <h3 class="mt-2 font-display text-2xl font-semibold uppercase tracking-[0.02em] text-ink sm:text-3xl">
+                  {study.title}
+                </h3>
+              </div>
+              <span class="inline-block shrink-0 self-start rounded-[2px] border border-accent/30 bg-accent-soft px-3 py-1 font-mono text-xs font-medium text-accent">
+                {study.metric}
+              </span>
+            </div>
+
+            <div class="mt-6 grid grid-cols-1 gap-6 md:grid-cols-3">
+              <div>
+                <h4 class="font-mono text-[11px] font-medium uppercase tracking-[0.14em] text-metal">
+                  {ui.work.contextLabel}
+                </h4>
+                <p class="mt-2 text-sm leading-relaxed text-ink">
+                  {study.summary}
+                </p>
+              </div>
+              <div>
+                <h4 class="font-mono text-[11px] font-medium uppercase tracking-[0.14em] text-metal">
+                  {ui.work.architectureLabel}
+                </h4>
+                <p class="mt-2 text-sm leading-relaxed text-muted">
+                  {study.architecture}
+                </p>
+              </div>
+              <div>
+                <h4 class="font-mono text-[11px] font-medium uppercase tracking-[0.14em] text-metal">
+                  {ui.work.impactLabel}
+                </h4>
+                <p class="mt-2 text-sm leading-relaxed text-muted">
+                  {study.impact}
+                </p>
+              </div>
+            </div>
+
+            <div class="mt-6 flex flex-wrap gap-1.5 border-t border-line pt-5">
+              {study.stack.map((tech) => (
+                <span class="rounded-[2px] border border-line bg-subtle px-2.5 py-0.5 font-mono text-[11px] text-metal">
+                  {tech}
+                </span>
+              ))}
+            </div>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+
+  <!-- 02 / Career Timeline -->
+  <section class="mx-auto max-w-5xl px-6 py-12">
+    <SectionHeader
+      index="02"
+      label={ui.work.careerLabel}
+      title={ui.work.careerTitle}
+    />
+
+    <div class="divide-y divide-line border-y border-line">
+      {
+        experience.map((job) => (
+          <div class="grid grid-cols-1 gap-6 py-10 md:grid-cols-12 md:gap-8">
+            <div class="md:col-span-4">
+              <p class="font-mono text-xs font-medium text-ink">{job.period}</p>
+              <p class="mt-1 font-mono text-xs text-muted">{job.location}</p>
+            </div>
+
+            <div class="md:col-span-8">
+              <h3 class="font-display text-2xl font-semibold uppercase tracking-[0.02em] text-ink">
+                {job.role}
+              </h3>
+              <p class="mt-1 font-mono text-xs font-medium uppercase tracking-wider text-accent">
+                {job.company}
+              </p>
+              {job.domain && (
+                <p class="mt-1 font-mono text-xs text-muted">{job.domain}</p>
+              )}
+              {job.summary && (
+                <p class="mt-3 text-sm leading-relaxed text-metal">
+                  {job.summary}
+                </p>
+              )}
+
+              {job.highlights && (
+                <ul class="mt-4 space-y-2 text-sm leading-relaxed text-muted">
+                  {job.highlights.map((bullet) => (
+                    <li class="flex gap-2.5">
+                      <span class="mt-2 h-1.5 w-1.5 shrink-0 bg-accent" />
+                      <span>{bullet}</span>
+                    </li>
+                  ))}
+                </ul>
+              )}
+
+              {job.stack && (
+                <div class="mt-4 flex flex-wrap gap-1.5">
+                  {job.stack.map((tech) => (
+                    <span class="rounded-[2px] border border-line bg-subtle px-2.5 py-0.5 font-mono text-[11px] text-metal">
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+              )}
+
+              {job.engagements && (
+                <div class="mt-6 space-y-6 border-l-2 border-accent/60 pl-5">
+                  {job.engagements.map((eng) => (
+                    <div>
+                      <div class="flex flex-wrap items-baseline justify-between gap-2">
+                        <h4 class="font-display text-lg font-semibold uppercase tracking-[0.02em] text-ink">
+                          {eng.name}
+                        </h4>
+                        <span class="font-mono text-xs text-muted">
+                          {eng.period}
+                        </span>
+                      </div>
+                      <p class="font-mono text-xs text-muted">{eng.domain}</p>
+                      <ul class="mt-2.5 space-y-2 text-sm leading-relaxed text-muted">
+                        {eng.highlights.map((item) => (
+                          <li class="flex gap-2.5">
+                            <span class="mt-2 h-1.5 w-1.5 shrink-0 bg-accent" />
+                            <span>{item}</span>
+                          </li>
+                        ))}
+                      </ul>
+                      <div class="mt-3 flex flex-wrap gap-1.5">
+                        {eng.stack.map((tech) => (
+                          <span class="rounded-[2px] border border-line bg-subtle px-2 py-0.5 font-mono text-[11px] text-metal">
+                            {tech}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          </div>
+        ))
+      }
+
+      <!-- Early Career Compact Row -->
+      <div class="grid grid-cols-1 gap-6 py-10 md:grid-cols-12 md:gap-8">
+        <div class="md:col-span-4">
+          <p class="font-mono text-xs font-medium text-ink">
+            {locale === "es" ? "Ene 2010 – Mar 2018" : "Jan 2010 – Mar 2018"}
+          </p>
+          <p class="mt-1 font-mono text-xs text-muted">Bogotá, Colombia</p>
+        </div>
+        <div class="md:col-span-8">
+          <h3 class="font-display text-xl font-semibold uppercase tracking-[0.02em] text-ink">
+            {ui.work.earlyCareerTitle}
+          </h3>
+          <p class="mt-1 text-sm text-muted">
+            {ui.work.earlyCareerSummary}
+          </p>
+          <ul class="mt-4 divide-y divide-line border-t border-line">
+            {
+              earlyCareer.map((role) => (
+                <li class="flex flex-col justify-between gap-1 py-3 text-sm sm:flex-row sm:items-center">
+                  <div>
+                    <span class="font-medium text-ink">{role.role}</span>
+                    <span class="text-muted"> · {role.company}</span>
+                  </div>
+                  <span class="font-mono text-xs text-muted">{role.period}</span>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 03 / Web & Open-Source Projects -->
+  <section class="mx-auto max-w-5xl px-6 py-12">
+    <SectionHeader
+      index="03"
+      label={ui.work.webLabel}
+      title={ui.work.webTitle}
+    />
+
+    <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
+      {
+        webProjects.map((project) => (
+          <article class="flex flex-col justify-between rounded-[2px] border border-line bg-surface p-6 transition-colors hover:border-line-strong">
+            <div>
+              {project.image && (
+                <div class="mb-5 overflow-hidden rounded-[2px] border border-line bg-paper">
+                  <img
+                    src={project.image}
+                    alt={`${project.title} preview`}
+                    loading="lazy"
+                    class="h-44 w-full object-cover"
+                  />
+                </div>
+              )}
+              <p class="font-mono text-xs uppercase tracking-wider text-accent">
+                {project.category}
+              </p>
+              <h3 class="mt-1.5 font-display text-2xl font-semibold uppercase tracking-[0.02em] text-ink">
+                {project.title}
+              </h3>
+              <p class="mt-2.5 text-sm leading-relaxed text-muted">
+                {project.description}
+              </p>
+            </div>
+
+            <div class="mt-5">
+              <div class="flex flex-wrap gap-1.5">
+                {project.stack.map((tech) => (
+                  <span class="rounded-[2px] border border-line bg-subtle px-2.5 py-0.5 font-mono text-[11px] text-metal">
+                    {tech}
+                  </span>
+                ))}
+              </div>
+              <a
+                href={project.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="mt-4 inline-flex items-center gap-1.5 font-mono text-xs font-medium uppercase tracking-wider text-ink underline decoration-line-strong underline-offset-4 transition-colors hover:text-accent hover:decoration-accent"
+              >
+                <span>{project.linkLabel}</span>
+                <span aria-hidden="true">↗</span>
+              </a>
+            </div>
+          </article>
+        ))
+      }
+    </div>
+
+    <!-- Bottom CTA -->
+    <div class="mt-16 flex flex-col items-start justify-between gap-4 border-t border-line pt-10 sm:flex-row sm:items-center">
+      <div>
+        <p class="font-display text-xl font-semibold uppercase tracking-[0.02em] text-ink">
+          {ui.work.bottomPrompt}
+        </p>
+        <p class="text-sm text-muted">
+          {ui.work.bottomSub}
+        </p>
+      </div>
+      <div class="flex flex-wrap gap-3">
+        <a
+          href={profile.cvPath}
+          download={profile.cvDownloadName}
+          class="rounded-[2px] border border-line-strong bg-surface px-4 py-2 font-mono text-xs font-medium uppercase tracking-wider text-ink transition-colors hover:border-metal"
+        >
+          {ui.work.downloadResume}
+        </a>
+        <a
+          href={contactHref}
+          class="rounded-[2px] bg-accent px-5 py-2 font-mono text-xs font-medium uppercase tracking-wider text-paper transition-colors hover:bg-ink"
+        >
+          {ui.work.contactMe}
+        </a>
+      </div>
+    </div>
+  </section>
+</Layout>

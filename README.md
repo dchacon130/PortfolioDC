@@ -19,6 +19,8 @@ All site content is intentionally separated from UI layout so you can update tex
 | Consulting services & deliverables | [`src/data/services.ts`](src/data/services.ts) |
 | Colors (`--color-paper`, `--color-ink`, `--color-accent`, etc.) & fonts | [`src/styles/global.css`](src/styles/global.css) |
 | Downloadable Resume PDF | `public/assets/cv/Diego-Chacon-SDET-CV.pdf` *(update `cvPath` in `src/data/profile.ts` if renamed)* |
+| UI strings, navigation labels & SEO titles (`EN` / `ES`) | [`src/i18n/ui.ts`](src/i18n/ui.ts) and [`src/i18n/utils.ts`](src/i18n/utils.ts) |
+| Shared page views (edit layout once for both `EN` and `ES`) | `src/views/*View.astro` |
 | Brand logo, favicon & Open Graph banner | `public/assets/brand/logo-dc.png`, `public/favicon.svg`, `public/assets/brand/og-banner.png` ([edit in Canva](https://canva.link/jqsob1lscv5351l)) |
 | SEO meta tags, `<title>`, Open Graph, Google Fonts | [`src/layouts/Layout.astro`](src/layouts/Layout.astro) |
 | Top navigation bar & mobile drawer | [`src/components/Menu.astro`](src/components/Menu.astro) |
