@@ -31,13 +31,15 @@ test.describe('Contact Page & Form UX @critical', () => {
     await expect(page.locator('#form-status')).toBeHidden();
   });
 
-  test('submits contact form to Formspree and resets on success', async ({ page }) => {
+  test('submits contact form to Formspree as JSON and resets on success', async ({ page }) => {
     const shell = new PortfolioShell(page);
     await shell.goto('/contact');
 
-    let capturedRequest = false;
+    let capturedBody: Record<string, string> | null = null;
     await page.route('https://formspree.io/f/**', async (route) => {
-      capturedRequest = route.request().method() === 'POST';
+      if (route.request().method() === 'POST') {
+        capturedBody = route.request().postDataJSON();
+      }
       await route.fulfill({
         status: 200,
         contentType: 'application/json',
@@ -52,8 +54,59 @@ test.describe('Contact Page & Form UX @critical', () => {
 
     await expect(page.locator('#form-status')).toBeVisible();
     await expect(page.locator('#form-status')).toContainText('Message sent');
-    expect(capturedRequest).toBe(true);
+    expect(capturedBody).toMatchObject({
+      name: 'QA Recruiter',
+      email: 'recruiter@example.com',
+      message: 'Interested in discussing a Senior SDET role.',
+    });
     await expect(page.getByLabel('Name')).toHaveValue('');
+  });
+
+  test('falls back to native HTML POST when Formspree requires reCAPTCHA (403)', async ({
+    page,
+  }) => {
+    const shell = new PortfolioShell(page);
+    await shell.goto('/contact');
+
+    await expect(page.locator('#contact-form')).toHaveAttribute(
+      'action',
+      'https://formspree.io/f/xdkenlqw'
+    );
+    await expect(page.locator('#contact-form')).toHaveAttribute('method', 'POST');
+
+    // Intercept native form.submit() in page context to verify fallback without external redirect
+    await page.evaluate(() => {
+      (window as unknown as { __nativeSubmitCalled?: boolean }).__nativeSubmitCalled = false;
+      const formEl = document.getElementById('contact-form') as HTMLFormElement | null;
+      if (formEl) {
+        formEl.submit = () => {
+          (window as unknown as { __nativeSubmitCalled?: boolean }).__nativeSubmitCalled = true;
+        };
+      }
+    });
+
+    await page.route('https://formspree.io/f/**', async (route) => {
+      await route.fulfill({
+        status: 403,
+        contentType: 'application/json',
+        body: JSON.stringify({
+          error:
+            "In order to submit via AJAX, you need to set a custom key or reCAPTCHA must be disabled in this form's settings page.",
+        }),
+      });
+    });
+
+    await page.getByLabel('Name').fill('QA Recruiter');
+    await page.getByLabel('Email').fill('recruiter@example.com');
+    await page.getByLabel('Message').fill('Testing Formspree reCAPTCHA fallback.');
+    await page.getByRole('button', { name: /Send message/i }).click();
+
+    await expect(page.locator('#form-status')).toBeVisible();
+    await expect(page.locator('#form-status')).toContainText(/security verification/i);
+    const nativeSubmitCalled = await page.evaluate(
+      () => (window as unknown as { __nativeSubmitCalled?: boolean }).__nativeSubmitCalled
+    );
+    expect(nativeSubmitCalled).toBe(true);
   });
 
   test('shows fallback email guidance when Formspree returns an error', async ({ page }) => {
