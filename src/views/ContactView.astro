@@ -120,14 +120,22 @@ const ui = getUiCopy(locale);
 
           <form
             id="contact-form"
+            action={profile.contactFormEndpoint || undefined}
+            method={profile.contactFormEndpoint ? "POST" : undefined}
             data-endpoint={profile.contactFormEndpoint}
             data-email={profile.email}
             data-msg-mailto={ui.contact.statusMailtoPrefix}
             data-msg-success={ui.contact.statusSuccess}
+            data-msg-redirecting={ui.contact.statusRedirecting}
             data-msg-submit-error={ui.contact.statusSubmitError}
             data-msg-network-error={ui.contact.statusNetworkError}
             class="mt-6 space-y-5"
           >
+            <input
+              type="hidden"
+              name="_subject"
+              value={`Portfolio Inquiry — ${profile.name}`}
+            />
             <!-- Honeypot spam trap -->
             <input
               type="text"
@@ -271,6 +279,7 @@ const ui = getUiCopy(locale);
 
     const msgMailto = form.dataset.msgMailto || "Opening your email app to send this message to";
     const msgSuccess = form.dataset.msgSuccess || "Message sent. Thank you for reaching out.";
+    const msgRedirecting = form.dataset.msgRedirecting || "Completing security verification via Formspree...";
     const msgSubmitError = form.dataset.msgSubmitError || "Could not submit via form right now. Please email";
     const msgNetworkError = form.dataset.msgNetworkError || "Network error while sending. Please email";
 
@@ -286,16 +295,49 @@ const ui = getUiCopy(locale);
     try {
       const response = await fetch(endpoint, {
         method: "POST",
-        headers: { Accept: "application/json" },
-        body: formData,
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          name,
+          email,
+          message,
+          _subject: `Portfolio Inquiry from ${name}`,
+        }),
       });
 
       if (response.ok) {
         form.reset();
         showStatus(msgSuccess);
-      } else {
-        showStatus(`${msgSubmitError} ${targetEmail}.`, true);
+        return;
       }
+
+      let errorDetail = "";
+      try {
+        const payload = await response.json();
+        if (typeof payload?.error === "string") {
+          errorDetail = payload.error;
+        } else if (Array.isArray(payload?.errors) && payload.errors.length > 0) {
+          errorDetail = payload.errors
+            .map((item: { message?: string }) => item.message)
+            .filter(Boolean)
+            .join(", ");
+        }
+      } catch {
+        // Ignore non-JSON error bodies
+      }
+
+      // Formspree returns 403 when reCAPTCHA is enabled in form settings and AJAX is used.
+      // Fall back seamlessly to standard HTML POST so Formspree's hosted reCAPTCHA handles delivery.
+      if (response.status === 403 && /recaptcha/i.test(errorDetail)) {
+        showStatus(msgRedirecting);
+        form.submit();
+        return;
+      }
+
+      const detailSuffix = errorDetail ? ` (${errorDetail})` : "";
+      showStatus(`${msgSubmitError} ${targetEmail}.${detailSuffix}`, true);
     } catch {
       showStatus(`${msgNetworkError} ${targetEmail}.`, true);
     } finally {
