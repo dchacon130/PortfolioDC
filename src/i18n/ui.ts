@@ -21,6 +21,7 @@ export interface UiCopy {
     mobileLabel: string;
     toggleMenu: string;
     languageSwitcherLabel: string;
+    themeToggleLabel: string;
   };
   footer: {
     navigation: string;
@@ -148,6 +149,7 @@ export const uiCopy: Record<Locale, UiCopy> = {
       mobileLabel: 'Mobile navigation',
       toggleMenu: 'Toggle navigation menu',
       languageSwitcherLabel: 'Language selector',
+      themeToggleLabel: 'Toggle color theme',
     },
     footer: {
       navigation: 'Navigation',
@@ -286,6 +288,7 @@ export const uiCopy: Record<Locale, UiCopy> = {
       mobileLabel: 'Navegación móvil',
       toggleMenu: 'Abrir o cerrar menú de navegación',
       languageSwitcherLabel: 'Selector de idioma',
+      themeToggleLabel: 'Cambiar tema de color',
     },
     footer: {
       navigation: 'Navegación',

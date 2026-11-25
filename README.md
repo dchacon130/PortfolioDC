@@ -96,6 +96,14 @@ npm run test:e2e:report
 
 ---
 
+## Production Site, Sitemap & Analytics
+
+- **Live URL:** [https://diego-chacon-portfolio.netlify.app](https://diego-chacon-portfolio.netlify.app) (configured in [`astro.config.mjs`](astro.config.mjs) and [`src/data/profile.ts`](src/data/profile.ts))
+- **Sitemap:** Auto-generated at `/sitemap-index.xml` via `@astrojs/sitemap` with `en` / `es` alternates and referenced in [`public/robots.txt`](public/robots.txt).
+- **Netlify Headers:** Security & asset cache headers defined in [`netlify.toml`](netlify.toml).
+- **Privacy-First Analytics:** Paste a Cloudflare Web Analytics token or Plausible domain in `analytics` inside [`src/data/profile.ts`](src/data/profile.ts) — zero tracking scripts load while empty.
+- **Theme Toggle:** Defaults to **Heavy Metal Dark** (`#0B0B0C`) with an optional **Brushed Steel Light** toggle in the header persisted via `localStorage`.
+
 ## Contact Form
 
 The `/contact` page is connected to **Formspree** (`contactFormEndpoint` in [`src/data/profile.ts`](src/data/profile.ts)) with honeypot spam protection, async submission states, and graceful fallback guidance. To swap providers or disable it, update `contactFormEndpoint` in [`src/data/profile.ts`](src/data/profile.ts).
