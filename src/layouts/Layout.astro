@@ -1,29 +1,77 @@
 ---
-import Footer from "../components/Footer.astro";
+import "../styles/global.css";
 import Menu from "../components/Menu.astro";
+import Footer from "../components/Footer.astro";
+import { profile } from "../data/profile";
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = profile.seo.defaultTitle,
+  description = profile.seo.defaultDescription,
+} = Astro.props;
+
+const fullTitle =
+  title === profile.seo.defaultTitle ? title : `${title} — ${profile.name}`;
+const canonicalUrl = new URL(Astro.url.pathname, profile.seo.siteUrl).href;
+const ogImageUrl = new URL(profile.seo.ogImage, profile.seo.siteUrl).href;
 ---
 
 <!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <link rel="icon" type="image/svg+xml" href="/favicon1.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#0B0B0C" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="canonical" href={canonicalUrl} />
     <meta name="generator" content={Astro.generator} />
-    <title>Diego Chacon - PortfolioDC</title>
+
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <meta name="author" content={profile.fullName} />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:site_name" content={profile.name} />
+
+    <!-- Twitter / X -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageUrl} />
+
+    <!-- Typography: Oswald (Display) + Plus Jakarta Sans (Body) + IBM Plex Mono (Specs) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Oswald:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
   </head>
-  <body class="bg-principal-color font-mono text-white">
+  <body class="bg-paper text-ink selection:bg-accent selection:text-paper">
+    <a
+      href="#main-content"
+      class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:bg-accent focus:px-4 focus:py-2 focus:font-mono focus:text-xs focus:font-semibold focus:text-paper"
+    >
+      Skip to content
+    </a>
+
     <Menu />
-    <slot />
+
+    <main id="main-content" class="flex-1">
+      <slot />
+    </main>
+
     <Footer />
   </body>
 </html>
-
-<style>
-  html,
-  body {
-    margin: 0;
-    width: 100%;
-    height: 100%;
-  }
-</style>

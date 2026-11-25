@@ -22,3 +22,14 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# local source CV folder at repo root only (published copy lives in public/assets/cv/)
+/CV/
+
+# Playwright artifacts
+playwright-report/
+test-results/
+blob-report/
+playwright/.cache/
+
+

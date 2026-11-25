@@ -1,142 +1,183 @@
 ---
 import Layout from "../layouts/Layout.astro";
-
-import "../styles/global.css";
+import SectionHeader from "../components/SectionHeader.astro";
+import { profile } from "../data/profile";
+import { skillGroups, credentials, languages } from "../data/skills";
 ---
 
-<Layout>
-  <div class="container mx-auto p-4 pt-30">
-    <div class="max-w-4xl mx-auto">
-      <h1 class="text-4xl font-bold text-ebony mb-8 text-center">About Me</h1>
-      
-      <!-- Sección Principal -->
-      <div class="bg-white rounded-lg shadow-md p-8 mb-8">
-        <p class="text-lg text-ebony leading-relaxed mb-6">
-          With over 10 years of experience in the IT field, I specialize in both manual and automated testing, 
-          ensuring software quality across various platforms and applications. My approach combines technical expertise 
-          with a strong focus on user experience and business objectives.
-        </p>
-        <p class="text-lg text-ebony leading-relaxed">
-          I am methodical, analytical, and results-driven, with a proven ability to quickly identify and resolve issues. 
-          My focus is on delivering high-quality products that meet the highest standards, optimizing processes, 
-          and enhancing user experience.
-        </p>
-      </div>
+<Layout
+  title="About"
+  description="Background, technical matrix, ISTQB certifications, and engineering principles of Diego Chacón, Senior QA Automation Engineer / SDET."
+>
+  <!-- Page Header -->
+  <section class="mx-auto max-w-5xl px-6 pt-16 pb-12 sm:pt-20">
+    <div class="reveal">
+      <p class="font-mono text-xs uppercase tracking-[0.16em] text-muted">
+        <span class="text-accent">ABOUT</span> // PROFILE & CREDENTIALS
+      </p>
+      <h1 class="mt-3 max-w-3xl font-display text-4xl font-bold uppercase tracking-[0.015em] text-ink sm:text-5xl lg:text-6xl">
+        Methodical quality engineering, forged for release speed.
+      </h1>
+    </div>
+  </section>
 
-      <!-- Educación y Certificaciones -->
-      <div class="bg-white rounded-lg shadow-md p-8 mb-8">
-        <h2 class="text-2xl font-semibold text-ebony mb-6">Education & Certifications</h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div class="flex items-start space-x-3">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-red-orange" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z" />
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z" />
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z" />
-            </svg>
+  <!-- Executive Bio + Quick Facts -->
+  <section class="mx-auto max-w-5xl px-6 py-8">
+    <div class="grid grid-cols-1 gap-10 border-y border-line py-12 md:grid-cols-12">
+      <!-- Quick Facts Sidebar -->
+      <aside class="md:col-span-4">
+        <div class="rounded-[2px] border border-line-strong border-t-2 border-t-accent bg-surface p-6">
+          <div class="flex items-center gap-3 border-b border-line pb-4">
+            <img
+              src="/assets/brand/logo-dc.png"
+              alt="Diego Chacón mark"
+              width="36"
+              height="36"
+              class="h-9 w-9 object-contain"
+            />
             <div>
-              <h3 class="font-semibold text-ebony">Software Development Engineer</h3>
-              <p class="text-gray-600">Universidad Nacional Abierta y a Distancia (UNAD)</p>
+              <p class="font-display text-base font-semibold uppercase tracking-wider text-ink">
+                {profile.name}
+              </p>
+              <p class="font-mono text-xs text-accent">Senior SDET</p>
             </div>
           </div>
-          <div class="flex items-start space-x-3">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-red-orange" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
-            </svg>
+
+          <dl class="mt-4 space-y-3.5 text-sm">
             <div>
-              <h3 class="font-semibold text-ebony">Certifications</h3>
-              <ul class="text-gray-600 space-y-1">
-                <li>ISTQB-CTFL-AT Agile Tester</li>
-                <li>Advanced Test Automation Engineer</li>
-                <li>Scrum Master</li>
-                <li>Developer RPA with UiPath</li>
-                <li>EF SET Certificate English B2</li>
-              </ul>
+              <dt class="font-mono text-[11px] uppercase tracking-[0.14em] text-muted">
+                Location
+              </dt>
+              <dd class="mt-0.5 text-ink">{profile.location}</dd>
             </div>
+            <div>
+              <dt class="font-mono text-[11px] uppercase tracking-[0.14em] text-muted">
+                Collaboration
+              </dt>
+              <dd class="mt-0.5 text-ink">{profile.workMode}</dd>
+            </div>
+            <div>
+              <dt class="font-mono text-[11px] uppercase tracking-[0.14em] text-muted">
+                Core Stack
+              </dt>
+              <dd class="mt-0.5 font-mono text-xs text-metal">
+                Playwright · WebdriverIO · Appium · TypeScript
+              </dd>
+            </div>
+            <div>
+              <dt class="font-mono text-[11px] uppercase tracking-[0.14em] text-muted">
+                Languages
+              </dt>
+              <dd class="mt-0.5 space-y-1">
+                {
+                  languages.map((lang) => (
+                    <p class="text-xs text-ink">
+                      <span class="font-medium">{lang.name}</span>
+                      <span class="text-muted"> — {lang.level}</span>
+                    </p>
+                  ))
+                }
+              </dd>
+            </div>
+          </dl>
+
+          <div class="mt-6 border-t border-line pt-4">
+            <a
+              href={profile.cvPath}
+              download={profile.cvDownloadName}
+              class="flex w-full items-center justify-center gap-2 rounded-[2px] bg-accent px-4 py-2.5 font-mono text-xs font-medium uppercase tracking-wider text-paper transition-colors hover:bg-ink"
+            >
+              <span>Download Resume PDF</span>
+              <span aria-hidden="true">↓</span>
+            </a>
           </div>
         </div>
-      </div>
+      </aside>
 
-      <!-- Por qué trabajar conmigo -->
-      <div class="bg-white rounded-lg shadow-md p-8 mb-8">
-        <h2 class="text-2xl font-semibold text-ebony mb-6">Why Work With Me?</h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div class="flex items-start space-x-3">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-red-orange" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-            </svg>
-            <div>
-              <h3 class="font-semibold text-ebony mb-2">Proven Experience</h3>
-              <p class="text-gray-600">Over a decade in QA, working on international projects and with multicultural teams.</p>
-            </div>
-          </div>
-          <div class="flex items-start space-x-3">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-red-orange" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>
-            <div>
-              <h3 class="font-semibold text-ebony mb-2">Quality Focus</h3>
-              <p class="text-gray-600">Committed to delivering high-quality products, ensuring client satisfaction and software stability.</p>
-            </div>
-          </div>
-          <div class="flex items-start space-x-3">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-red-orange" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
-            </svg>
-            <div>
-              <h3 class="font-semibold text-ebony mb-2">Efficient Automation</h3>
-              <p class="text-gray-600">Expertise in creating and maintaining automation scripts that optimize testing processes.</p>
-            </div>
-          </div>
-          <div class="flex items-start space-x-3">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-red-orange" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
-            </svg>
-            <div>
-              <h3 class="font-semibold text-ebony mb-2">Clear Communication</h3>
-              <p class="text-gray-600">Ability to present test results clearly and concisely, facilitating decision-making.</p>
-            </div>
-          </div>
-        </div>
-      </div>
+      <!-- Narrative -->
+      <div class="space-y-5 md:col-span-8">
+        {
+          profile.aboutSummary.map((paragraph) => (
+            <p class="text-base leading-relaxed text-metal sm:text-lg sm:leading-relaxed">
+              {paragraph}
+            </p>
+          ))
+        }
 
-      <!-- Skills -->
-      <div class="bg-white rounded-lg shadow-md p-8">
-        <h2 class="text-2xl font-semibold text-ebony mb-6">Technical Skills</h2>
-        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-          <a href="#" class="flex items-center space-x-2 text-ebony hover:text-red-orange transition-colors duration-200 p-2 rounded hover:bg-gray-50">
-            <img src="/assets/icons/html5.png" alt="HTML5" class="h-6 w-6" />
-            <span>HTML5</span>
-          </a>
-          <a href="#" class="flex items-center space-x-2 text-ebony hover:text-red-orange transition-colors duration-200 p-2 rounded hover:bg-gray-50">
-            <img src="/assets/icons/css3.png" alt="CSS3" class="h-6 w-6" />
-            <span>CSS3</span>
-          </a>
-          <a href="#" class="flex items-center space-x-2 text-ebony hover:text-red-orange transition-colors duration-200 p-2 rounded hover:bg-gray-50">
-            <img src="/assets/icons/javascript.png" alt="JavaScript" class="h-6 w-6" />
-            <span>JavaScript</span>
-          </a>
-          <a href="#" class="flex items-center space-x-2 text-ebony hover:text-red-orange transition-colors duration-200 p-2 rounded hover:bg-gray-50">
-            <img src="/assets/icons/react.png" alt="React" class="h-6 w-6" />
-            <span>React</span>
-          </a>
-          <a href="#" class="flex items-center space-x-2 text-ebony hover:text-red-orange transition-colors duration-200 p-2 rounded hover:bg-gray-50">
-            <img src="/assets/icons/nodejs.png" alt="NodeJS" class="h-6 w-6" />
-            <span>NodeJS</span>
-          </a>
-          <a href="#" class="flex items-center space-x-2 text-ebony hover:text-red-orange transition-colors duration-200 p-2 rounded hover:bg-gray-50">
-            <img src="/assets/icons/python.png" alt="Python" class="h-6 w-6" />
-            <span>Python</span>
-          </a>
-          <a href="#" class="flex items-center space-x-2 text-ebony hover:text-red-orange transition-colors duration-200 p-2 rounded hover:bg-gray-50">
-            <img src="/assets/icons/selenium.png" alt="Selenium" class="h-6 w-6" />
-            <span>Selenium</span>
-          </a>
-          <a href="#" class="flex items-center space-x-2 text-ebony hover:text-red-orange transition-colors duration-200 p-2 rounded hover:bg-gray-50">
-            <img src="/assets/icons/playwright.png" alt="Playwright" class="h-6 w-6" />
-            <span>Playwright</span>
-          </a>
+        <div class="grid grid-cols-1 gap-4 pt-6 sm:grid-cols-2">
+          <div class="rounded-[2px] border border-line bg-surface p-5">
+            <p class="font-mono text-xs uppercase tracking-wider text-accent">
+              01 // Signal over noise
+            </p>
+            <p class="mt-2 text-sm leading-relaxed text-muted">
+              I treat test code like production code: clean abstractions, deterministic data, minimal flakiness, and reports engineers actually read.
+            </p>
+          </div>
+          <div class="rounded-[2px] border border-line bg-surface p-5">
+            <p class="font-mono text-xs uppercase tracking-wider text-accent">
+              02 // Product-first QA
+            </p>
+            <p class="mt-2 text-sm leading-relaxed text-muted">
+              I clarify edge cases at the Figma and requirements stage before writing scripts—preventing defects earlier instead of merely logging them later.
+            </p>
+          </div>
         </div>
       </div>
     </div>
-  </div>
+  </section>
+
+  <!-- 01 / Technical Skills Matrix -->
+  <section class="mx-auto max-w-5xl px-6 py-14">
+    <SectionHeader
+      index="01"
+      label="Technical Stack"
+      title="Tools, frameworks & platforms"
+    />
+
+    <div class="divide-y divide-line border-y border-line">
+      {
+        skillGroups.map((group) => (
+          <div class="grid grid-cols-1 gap-4 py-5 md:grid-cols-12 md:items-baseline">
+            <h3 class="font-mono text-xs font-medium uppercase tracking-[0.12em] text-muted md:col-span-4">
+              {group.category}
+            </h3>
+            <div class="flex flex-wrap gap-2 md:col-span-8">
+              {group.items.map((skill) => (
+                <span class="rounded-[2px] border border-line bg-surface px-3 py-1 font-mono text-xs text-metal">
+                  {skill}
+                </span>
+              ))}
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <!-- 02 / Education & Certifications -->
+  <section class="mx-auto max-w-5xl px-6 py-10">
+    <SectionHeader
+      index="02"
+      label="Credentials"
+      title="Certifications & education"
+    />
+
+    <div class="divide-y divide-line border-y border-line">
+      {
+        credentials.map((cred) => (
+          <div class="flex flex-col justify-between gap-2 py-5 sm:flex-row sm:items-center">
+            <div>
+              <h3 class="text-base font-medium text-ink">{cred.title}</h3>
+              <p class="mt-0.5 text-sm text-muted">{cred.issuer}</p>
+            </div>
+            {cred.badge && (
+              <span class="inline-block shrink-0 self-start rounded-[2px] border border-accent/30 bg-accent-soft px-2.5 py-1 font-mono text-xs uppercase tracking-wider text-accent sm:self-center">
+                {cred.badge}
+              </span>
+            )}
+          </div>
+        ))
+      }
+    </div>
+  </section>
 </Layout>
