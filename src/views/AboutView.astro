@@ -1,0 +1,197 @@
+---
+import Layout from "../layouts/Layout.astro";
+import SectionHeader from "../components/SectionHeader.astro";
+import { getProfile } from "../data/profile";
+import { getSkillGroups, getCredentials, getLanguages } from "../data/skills";
+import { getUiCopy } from "../i18n/ui";
+import type { Locale } from "../i18n/utils";
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const profile = getProfile(locale);
+const ui = getUiCopy(locale);
+const skillGroups = getSkillGroups(locale);
+const credentials = getCredentials(locale);
+const languages = getLanguages(locale);
+---
+
+<Layout
+  locale={locale}
+  title={ui.about.seoTitle}
+  description={ui.about.seoDescription}
+>
+  <!-- Page Header -->
+  <section class="mx-auto max-w-5xl px-6 pt-16 pb-12 sm:pt-20">
+    <div class="reveal">
+      <p class="font-mono text-xs uppercase tracking-[0.16em] text-muted">
+        <span class="text-accent">{ui.about.eyebrowTag}</span> // {ui.about.eyebrowSub}
+      </p>
+      <h1 class="mt-3 max-w-3xl font-display text-4xl font-bold uppercase tracking-[0.015em] text-ink sm:text-5xl lg:text-6xl">
+        {ui.about.title}
+      </h1>
+    </div>
+  </section>
+
+  <!-- Executive Bio + Quick Facts -->
+  <section class="mx-auto max-w-5xl px-6 py-8">
+    <div class="grid grid-cols-1 gap-10 border-y border-line py-12 md:grid-cols-12">
+      <!-- Quick Facts Sidebar -->
+      <aside class="md:col-span-4">
+        <div class="rounded-[2px] border border-line-strong border-t-2 border-t-accent bg-surface p-6">
+          <div class="flex items-center gap-3 border-b border-line pb-4">
+            <img
+              src="/assets/brand/logo-dc.png"
+              alt="Diego Chacón mark"
+              width="36"
+              height="36"
+              class="h-9 w-9 object-contain"
+            />
+            <div>
+              <p class="font-display text-base font-semibold uppercase tracking-wider text-ink">
+                {profile.name}
+              </p>
+              <p class="font-mono text-xs text-accent">Senior SDET</p>
+            </div>
+          </div>
+
+          <dl class="mt-4 space-y-3.5 text-sm">
+            <div>
+              <dt class="font-mono text-[11px] uppercase tracking-[0.14em] text-muted">
+                {ui.about.locationLabel}
+              </dt>
+              <dd class="mt-0.5 text-ink">{profile.location}</dd>
+            </div>
+            <div>
+              <dt class="font-mono text-[11px] uppercase tracking-[0.14em] text-muted">
+                {ui.about.collaborationLabel}
+              </dt>
+              <dd class="mt-0.5 text-ink">{profile.workMode}</dd>
+            </div>
+            <div>
+              <dt class="font-mono text-[11px] uppercase tracking-[0.14em] text-muted">
+                {ui.about.coreStackLabel}
+              </dt>
+              <dd class="mt-0.5 font-mono text-xs text-metal">
+                Playwright · WebdriverIO · Appium · TypeScript
+              </dd>
+            </div>
+            <div>
+              <dt class="font-mono text-[11px] uppercase tracking-[0.14em] text-muted">
+                {ui.about.languagesLabel}
+              </dt>
+              <dd class="mt-0.5 space-y-1">
+                {
+                  languages.map((lang) => (
+                    <p class="text-xs text-ink">
+                      <span class="font-medium">{lang.name}</span>
+                      <span class="text-muted"> — {lang.level}</span>
+                    </p>
+                  ))
+                }
+              </dd>
+            </div>
+          </dl>
+
+          <div class="mt-6 border-t border-line pt-4">
+            <a
+              href={profile.cvPath}
+              download={profile.cvDownloadName}
+              class="flex w-full items-center justify-center gap-2 rounded-[2px] bg-accent px-4 py-2.5 font-mono text-xs font-medium uppercase tracking-wider text-paper transition-colors hover:bg-ink"
+            >
+              <span>{ui.about.downloadResume}</span>
+              <span aria-hidden="true">↓</span>
+            </a>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Narrative -->
+      <div class="space-y-5 md:col-span-8">
+        {
+          profile.aboutSummary.map((paragraph) => (
+            <p class="text-base leading-relaxed text-metal sm:text-lg sm:leading-relaxed">
+              {paragraph}
+            </p>
+          ))
+        }
+
+        <div class="grid grid-cols-1 gap-4 pt-6 sm:grid-cols-2">
+          <div class="rounded-[2px] border border-line bg-surface p-5">
+            <p class="font-mono text-xs uppercase tracking-wider text-accent">
+              {ui.about.principle1Title}
+            </p>
+            <p class="mt-2 text-sm leading-relaxed text-muted">
+              {ui.about.principle1Body}
+            </p>
+          </div>
+          <div class="rounded-[2px] border border-line bg-surface p-5">
+            <p class="font-mono text-xs uppercase tracking-wider text-accent">
+              {ui.about.principle2Title}
+            </p>
+            <p class="mt-2 text-sm leading-relaxed text-muted">
+              {ui.about.principle2Body}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 01 / Technical Skills Matrix -->
+  <section class="mx-auto max-w-5xl px-6 py-14">
+    <SectionHeader
+      index="01"
+      label={ui.about.skillsLabel}
+      title={ui.about.skillsTitle}
+    />
+
+    <div class="divide-y divide-line border-y border-line">
+      {
+        skillGroups.map((group) => (
+          <div class="grid grid-cols-1 gap-4 py-5 md:grid-cols-12 md:items-baseline">
+            <h3 class="font-mono text-xs font-medium uppercase tracking-[0.12em] text-muted md:col-span-4">
+              {group.category}
+            </h3>
+            <div class="flex flex-wrap gap-2 md:col-span-8">
+              {group.items.map((skill) => (
+                <span class="rounded-[2px] border border-line bg-surface px-3 py-1 font-mono text-xs text-metal">
+                  {skill}
+                </span>
+              ))}
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <!-- 02 / Education & Certifications -->
+  <section class="mx-auto max-w-5xl px-6 py-10">
+    <SectionHeader
+      index="02"
+      label={ui.about.credentialsLabel}
+      title={ui.about.credentialsTitle}
+    />
+
+    <div class="divide-y divide-line border-y border-line">
+      {
+        credentials.map((cred) => (
+          <div class="flex flex-col justify-between gap-2 py-5 sm:flex-row sm:items-center">
+            <div>
+              <h3 class="text-base font-medium text-ink">{cred.title}</h3>
+              <p class="mt-0.5 text-sm text-muted">{cred.issuer}</p>
+            </div>
+            {cred.badge && (
+              <span class="inline-block shrink-0 self-start rounded-[2px] border border-accent/30 bg-accent-soft px-2.5 py-1 font-mono text-xs uppercase tracking-wider text-accent sm:self-center">
+                {cred.badge}
+              </span>
+            )}
+          </div>
+        ))
+      }
+    </div>
+  </section>
+</Layout>

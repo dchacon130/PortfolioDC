@@ -2,43 +2,62 @@
 import "../styles/global.css";
 import Menu from "../components/Menu.astro";
 import Footer from "../components/Footer.astro";
-import { profile } from "../data/profile";
+import { getProfile } from "../data/profile";
+import { getUiCopy } from "../i18n/ui";
+import { getAlternatePath, type Locale } from "../i18n/utils";
 
 interface Props {
+  locale?: Locale;
   title?: string;
   description?: string;
 }
 
 const {
-  title = profile.seo.defaultTitle,
-  description = profile.seo.defaultDescription,
+  locale = "en",
+  title,
+  description,
 } = Astro.props;
 
+const profile = getProfile(locale);
+const ui = getUiCopy(locale);
+
+const resolvedTitle = title ?? profile.seo.defaultTitle;
+const resolvedDescription = description ?? profile.seo.defaultDescription;
 const fullTitle =
-  title === profile.seo.defaultTitle ? title : `${title} — ${profile.name}`;
+  resolvedTitle === profile.seo.defaultTitle
+    ? resolvedTitle
+    : `${resolvedTitle} — ${profile.name}`;
+
 const canonicalUrl = new URL(Astro.url.pathname, profile.seo.siteUrl).href;
+const enUrl = new URL(getAlternatePath(Astro.url.pathname, "en"), profile.seo.siteUrl).href;
+const esUrl = new URL(getAlternatePath(Astro.url.pathname, "es"), profile.seo.siteUrl).href;
 const ogImageUrl = new URL(profile.seo.ogImage, profile.seo.siteUrl).href;
+const ogLocale = locale === "es" ? "es_CO" : "en_US";
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={locale}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#0B0B0C" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="canonical" href={canonicalUrl} />
+    <link rel="alternate" hreflang="en" href={enUrl} />
+    <link rel="alternate" hreflang="es" href={esUrl} />
+    <link rel="alternate" hreflang="x-default" href={enUrl} />
     <meta name="generator" content={Astro.generator} />
 
     <title>{fullTitle}</title>
-    <meta name="description" content={description} />
+    <meta name="description" content={resolvedDescription} />
     <meta name="author" content={profile.fullName} />
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
+    <meta property="og:locale" content={ogLocale} />
     <meta property="og:url" content={canonicalUrl} />
     <meta property="og:title" content={fullTitle} />
-    <meta property="og:description" content={description} />
+    <meta property="og:description" content={resolvedDescription} />
     <meta property="og:image" content={ogImageUrl} />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
@@ -47,7 +66,7 @@ const ogImageUrl = new URL(profile.seo.ogImage, profile.seo.siteUrl).href;
     <!-- Twitter / X -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={fullTitle} />
-    <meta name="twitter:description" content={description} />
+    <meta name="twitter:description" content={resolvedDescription} />
     <meta name="twitter:image" content={ogImageUrl} />
 
     <!-- Typography: Oswald (Display) + Plus Jakarta Sans (Body) + IBM Plex Mono (Specs) -->
@@ -63,15 +82,15 @@ const ogImageUrl = new URL(profile.seo.ogImage, profile.seo.siteUrl).href;
       href="#main-content"
       class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:bg-accent focus:px-4 focus:py-2 focus:font-mono focus:text-xs focus:font-semibold focus:text-paper"
     >
-      Skip to content
+      {ui.skipToContent}
     </a>
 
-    <Menu />
+    <Menu locale={locale} />
 
     <main id="main-content" class="flex-1">
       <slot />
     </main>
 
-    <Footer />
+    <Footer locale={locale} />
   </body>
 </html>

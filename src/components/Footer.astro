@@ -1,6 +1,15 @@
 ---
-import { profile } from "../data/profile";
+import { getProfile } from "../data/profile";
+import { getUiCopy } from "../i18n/ui";
+import type { Locale } from "../i18n/utils";
 
+interface Props {
+  locale?: Locale;
+}
+
+const { locale = "en" } = Astro.props;
+const profile = getProfile(locale);
+const ui = getUiCopy(locale);
 const currentYear = new Date().getFullYear();
 ---
 
@@ -32,7 +41,7 @@ const currentYear = new Date().getFullYear();
       <!-- Navigation -->
       <div class="md:col-span-3">
         <h2 class="font-mono text-xs font-medium uppercase tracking-[0.14em] text-muted">
-          Navigation
+          {ui.footer.navigation}
         </h2>
         <ul class="mt-4 space-y-2.5 text-sm">
           {
@@ -53,7 +62,7 @@ const currentYear = new Date().getFullYear();
               download={profile.cvDownloadName}
               class="text-metal transition-colors hover:text-accent"
             >
-              Download Resume (PDF)
+              {ui.nav.cvDownloadFull}
             </a>
           </li>
         </ul>
@@ -62,7 +71,7 @@ const currentYear = new Date().getFullYear();
       <!-- Direct & Socials -->
       <div class="md:col-span-4">
         <h2 class="font-mono text-xs font-medium uppercase tracking-[0.14em] text-muted">
-          Connect
+          {ui.footer.connect}
         </h2>
         <ul class="mt-4 space-y-2.5 text-sm">
           <li>
@@ -93,8 +102,8 @@ const currentYear = new Date().getFullYear();
     </div>
 
     <div class="mt-12 flex flex-col items-start justify-between gap-3 border-t border-line pt-6 font-mono text-xs text-muted sm:flex-row sm:items-center">
-      <p>© {currentYear} {profile.name} // Built with Astro & Tailwind CSS.</p>
-      <p class="text-metal/60">Zero bloat · Static-first</p>
+      <p>© {currentYear} {profile.name} // {ui.footer.builtWith}</p>
+      <p class="text-metal/60">{ui.footer.zeroBloat}</p>
     </div>
   </div>
 </footer>
