@@ -58,6 +58,10 @@ export interface LocalizedProfile {
     siteUrl: string;
     ogImage: string;
   };
+  analytics: {
+    cloudflareBeaconToken: string;
+    plausibleDomain: string;
+  };
 }
 
 const shared = {
@@ -100,8 +104,17 @@ const shared = {
     },
   ] satisfies SocialLink[],
 
-  siteUrl: 'https://portfolio-dc.vercel.app',
+  siteUrl: 'https://diego-chacon-portfolio.netlify.app',
   ogImage: '/assets/brand/og-banner.png',
+
+  /**
+   * Optional Privacy-First Analytics (zero cookies, no consent banner needed).
+   * Paste either a Cloudflare Web Analytics token or a Plausible domain to enable.
+   */
+  analytics: {
+    cloudflareBeaconToken: '',
+    plausibleDomain: '',
+  },
 };
 
 function buildNav(locale: Locale): NavItem[] {

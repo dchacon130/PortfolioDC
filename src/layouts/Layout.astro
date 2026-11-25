@@ -33,20 +33,36 @@ const enUrl = new URL(getAlternatePath(Astro.url.pathname, "en"), profile.seo.si
 const esUrl = new URL(getAlternatePath(Astro.url.pathname, "es"), profile.seo.siteUrl).href;
 const ogImageUrl = new URL(profile.seo.ogImage, profile.seo.siteUrl).href;
 const ogLocale = locale === "es" ? "es_CO" : "en_US";
+const { cloudflareBeaconToken, plausibleDomain } = profile.analytics;
 ---
 
 <!doctype html>
-<html lang={locale}>
+<html lang={locale} data-theme="dark">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#0B0B0C" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
     <link rel="canonical" href={canonicalUrl} />
     <link rel="alternate" hreflang="en" href={enUrl} />
     <link rel="alternate" hreflang="es" href={esUrl} />
     <link rel="alternate" hreflang="x-default" href={enUrl} />
     <meta name="generator" content={Astro.generator} />
+
+    <!-- Prevent theme flash: defaults to Heavy Metal Dark unless visitor chose light -->
+    <script is:inline>
+      (function () {
+        try {
+          const saved = localStorage.getItem("portfolio-theme");
+          if (saved === "light" || saved === "dark") {
+            document.documentElement.dataset.theme = saved;
+            const meta = document.querySelector('meta[name="theme-color"]');
+            if (meta) meta.setAttribute("content", saved === "light" ? "#ECECEE" : "#0B0B0C");
+          }
+        } catch {}
+      })();
+    </script>
 
     <title>{fullTitle}</title>
     <meta name="description" content={resolvedDescription} />
@@ -76,6 +92,26 @@ const ogLocale = locale === "es" ? "es_CO" : "en_US";
       href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Oswald:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
+
+    <!-- Optional Privacy-First Analytics (enabled only when configured in src/data/profile.ts) -->
+    {
+      cloudflareBeaconToken && (
+        <script
+          defer
+          src="https://static.cloudflareinsights.com/beacon.min.js"
+          data-cf-beacon={JSON.stringify({ token: cloudflareBeaconToken })}
+        />
+      )
+    }
+    {
+      plausibleDomain && (
+        <script
+          defer
+          data-domain={plausibleDomain}
+          src="https://plausible.io/js/script.js"
+        />
+      )
+    }
   </head>
   <body class="bg-paper text-ink selection:bg-accent selection:text-paper">
     <a

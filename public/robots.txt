@@ -1,2 +1,4 @@
 User-agent: *
 Allow: /
+
+Sitemap: https://diego-chacon-portfolio.netlify.app/sitemap-index.xml

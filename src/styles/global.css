@@ -2,7 +2,7 @@
 
 /**
  * ============================================================================
- * DESIGN TOKENS — Heavy Metal Minimalist Palette
+ * DESIGN TOKENS — Heavy Metal Minimalist Palette (Dark default + Brushed Steel Light)
  * Edit these variables to adjust colors or typography across the entire site.
  * ============================================================================
  */
@@ -32,6 +32,26 @@
   --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 }
 
+/* Optional Industrial Light Theme: Raw Brushed Aluminum + Anvil Ink */
+html[data-theme="light"] {
+  --color-paper: #ECECEE;
+  --color-surface: #F7F7F8;
+  --color-subtle: #E1E2E6;
+
+  --color-ink: #111113;
+  --color-metal: #2C2D33;
+  --color-muted: #555660;
+
+  --color-line: #D2D4DA;
+  --color-line-strong: #B0B3BD;
+
+  --color-accent: #D94100;
+  --color-accent-hover: #B83600;
+  --color-accent-soft: rgba(217, 65, 0, 0.10);
+
+  color-scheme: light;
+}
+
 @layer base {
   html {
     background-color: var(--color-paper);
@@ -53,6 +73,15 @@
     background-image: radial-gradient(
       ellipse 70% 35% at 50% -10%,
       rgba(255, 77, 0, 0.08),
+      transparent 70%
+    );
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+
+  html[data-theme="light"] body {
+    background-image: radial-gradient(
+      ellipse 70% 35% at 50% -10%,
+      rgba(217, 65, 0, 0.06),
       transparent 70%
     );
   }
